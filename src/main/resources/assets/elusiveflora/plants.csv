@@ -1,0 +1,23 @@
+id,display_name,status,dimension,situation_rule,biome_types,biome_names,ground,condition,rarity,chunk_chance_percent,regrow_game_days,yield_per_pick,model,glow_light,showcase
+ledgebloom,Ledgebloom,approved,overworld,cliff face (6),MOUNTAIN|HILLS,,side:stone,always,rare,4,3,1,3d,0,yes
+pearlfrond,Pearlfrond,approved,overworld,ocean floor deep water (2),OCEAN,,water_bed:8+,always,rare,4,3,1,3d,10,yes
+streamreed,Streamreed,approved,overworld,river or lake bed (3),RIVER,,water_bed:1-4,always,uncommon,10,2,1,flat,0,no
+tideheart,Tideheart,approved,overworld,beach at the water line (4),BEACH,,on:sand;sea_level;near_water,always,uncommon,10,2,1,flat,0,no
+skyclover,Skyclover,approved,overworld,mountain top (5),MOUNTAIN|HILLS,,on:grass|stone;min_y:110,always,rare,4,3,1,flat,0,no
+canopytear,Canopy Tear,approved,overworld,on a tree trunk (7),JUNGLE,,side:log,always,rare,4,3,1,flat,0,no
+frostbell,Frostbell,approved,overworld,special ground snow (8),SNOWY,,on:snow|snow_layer,always,uncommon,10,2,1,flat,0,no
+sporecap,Sporecap,approved,overworld,special ground mycelium (8),MUSHROOM,,on:mycelium,always,very rare,2,4,1,flat,0,no
+emberroot,Emberroot,approved,overworld,next to surface lava (9),*,,on:any_solid;near_lava,always,very rare,2,4,1,flat,3,no
+duskwisp,Duskwisp,approved,overworld,opens at night and glows (12),FOREST|SPOOKY,,on:grass|dirt,night,uncommon,10,2,1,flat,9,no
+rainthistle,Rainthistle,approved,overworld,opens in rain (13),SWAMP|WET,,on:grass|dirt,rain,uncommon,10,2,1,flat,0,no
+thawbud,Thawbud,approved,overworld,opens in its season (14),PLAINS|FOREST,,on:grass,spring,rare,4,3,1,flat,0,no
+sunspire,Sunspire,approved,overworld,opens in its season (14),SAVANNA|PLAINS|HOT,,on:grass|sand,summer,rare,4,3,1,flat,0,no
+amberleaf,Amberleaf,approved,overworld,opens in its season (14),FOREST|CONIFEROUS,,on:grass|dirt,autumn,rare,4,3,1,flat,0,no
+winterthorn,Winterthorn,approved,overworld,opens in its season (14),COLD|CONIFEROUS,,on:grass|dirt|snow,winter,rare,4,3,1,flat,0,no
+moonveil,Moonveil,approved,overworld,opens at full moon and glows (15),MAGICAL,,on:grass|dirt,full_moon,very rare,2,4,1,flat,12,no
+umbrabud,Umbrabud,approved,overworld,opens at new moon (15),SPOOKY|DEAD,,on:grass|dirt,new_moon,very rare,2,4,1,flat,0,no
+soulwick,Soulwick,approved,nether,nether biome on soul sand (16 plus 8),NETHER,,on:soul_sand,always,rare,4,3,1,flat,0,no
+ashenlotus,Ashen Lotus,approved,nether,nether biome next to lava (16 plus 9),NETHER,,on:netherrack;near_lava,always,rare,4,3,1,flat,0,no
+voidbloom,Voidbloom,approved,end,end biome on any solid surface (17),END,,on:any_solid,always,rare,4,3,1,flat,4,no
+starpetal,Starpetal,approved,end,specific modded end biomes (17),,betterendforge:glowing_grasslands|betterendforge:lantern_woods|stygian:lunar_meadow|environs:end_forest,on:any_solid,always,rare,4,3,1,flat,6,no
+cloudfern,Cloudfern,approved,aether,aether biome (18),,aether_legacy:aether_highlands,on:aether_legacy:aether_grass,always,rare,4,3,1,flat,0,no

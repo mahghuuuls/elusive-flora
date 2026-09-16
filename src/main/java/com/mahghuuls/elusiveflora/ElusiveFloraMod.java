@@ -2,8 +2,6 @@ package com.mahghuuls.elusiveflora;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * Entry point for Elusive Flora: rare plants placed by world generation that regrow where they
@@ -26,10 +24,8 @@ import org.apache.logging.log4j.Logger;
                 + "after:sereneseasons")
 public class ElusiveFloraMod {
 
-    public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
-
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        LOGGER.info("{} {} loading", Tags.MOD_NAME, Tags.VERSION);
+        ElusiveFloraLog.LOGGER.info("{} {} loading", Tags.MOD_NAME, Tags.VERSION);
     }
 }
