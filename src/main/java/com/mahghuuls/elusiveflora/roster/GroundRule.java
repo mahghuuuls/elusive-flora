@@ -1,5 +1,14 @@
 package com.mahghuuls.elusiveflora.roster;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -235,6 +244,92 @@ public final class GroundRule {
     /** True when the rule accepts a water column of this many blocks above the bed. */
     public boolean acceptsDepth(int depth) {
         return depth >= minDepth && depth <= maxDepth;
+    }
+
+    /**
+     * Whether a plant of this rule may stand at {@code plantPos} right now. This is the one
+     * world-facing owner of the ground grammar: the generator asks it before placing, the block
+     * asks it to decide whether it may stay after a neighbor changes.
+     *
+     * <p>Ground rules ({@code on:}) look at the block below the plant and at the modifiers. The
+     * attached and water kinds are answered by their own slices; until then they never match.
+     */
+    public boolean matches(World world, BlockPos plantPos) {
+        switch (kind) {
+            case GROUND:
+                return matchesGround(world, plantPos);
+            default:
+                return false;
+        }
+    }
+
+    private boolean matchesGround(World world, BlockPos plantPos) {
+        BlockPos below = plantPos.down();
+        IBlockState ground = world.getBlockState(below);
+        if (!groundMatches(world, below, ground)) {
+            return false;
+        }
+        if (minY != NO_MIN_Y && plantPos.getY() < minY) {
+            return false;
+        }
+        // Beach sand sits at the water's top block, one below the sea level value.
+        if (seaLevel && Math.abs(below.getY() - (world.getSeaLevel() - 1)) > 1) {
+            return false;
+        }
+        if (nearLava && !hasHorizontalNeighbor(world, below, Material.LAVA)) {
+            return false;
+        }
+        if (nearWater && !hasHorizontalNeighbor(world, below, Material.WATER)) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean groundMatches(World world, BlockPos below, IBlockState ground) {
+        Block block = ground.getBlock();
+        for (String keyword : groundKeywords) {
+            if (keyword.equals(ANY_SOLID)) {
+                if (ground.getMaterial().isSolid() && ground.isSideSolid(world, below, EnumFacing.UP)) {
+                    return true;
+                }
+            } else if (block == blockFor(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The block a ground keyword names. Vanilla keywords cover their variants ({@code dirt} is
+     * dirt, coarse dirt, and podzol; {@code stone} is every stone variant) because those are one
+     * block with metadata. A registry name resolves through the registry and is null when the
+     * mod that owns it is absent, so it never matches.
+     */
+    private static Block blockFor(String keyword) {
+        switch (keyword) {
+            case "grass": return Blocks.GRASS;
+            case "dirt": return Blocks.DIRT;
+            case "sand": return Blocks.SAND;
+            case "snow": return Blocks.SNOW;
+            case "snow_layer": return Blocks.SNOW_LAYER;
+            case "mycelium": return Blocks.MYCELIUM;
+            case "soul_sand": return Blocks.SOUL_SAND;
+            case "netherrack": return Blocks.NETHERRACK;
+            case "end_stone": return Blocks.END_STONE;
+            case "stone": return Blocks.STONE;
+            default:
+                ResourceLocation name = new ResourceLocation(keyword);
+                return Block.REGISTRY.containsKey(name) ? Block.REGISTRY.getObject(name) : null;
+        }
+    }
+
+    private static boolean hasHorizontalNeighbor(World world, BlockPos pos, Material material) {
+        for (EnumFacing side : EnumFacing.HORIZONTALS) {
+            if (world.getBlockState(pos.offset(side)).getMaterial() == material) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

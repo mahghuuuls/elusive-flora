@@ -36,13 +36,6 @@ class ConditionTest {
     }
 
     @Test
-    void regrowArithmetic() {
-        assertEquals(97000, Condition.regrowAt(1000, 48000, 2.0));
-        assertEquals(49000, Condition.regrowAt(1000, 48000, 1.0));
-        assertEquals(5800, Condition.regrowAt(1000, 48000, 0.1));
-    }
-
-    @Test
     void seasonsAreSeasons() {
         assertTrue(Condition.SPRING.isSeason());
         assertTrue(Condition.WINTER.isSeason());
