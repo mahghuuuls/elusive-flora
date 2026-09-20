@@ -1,6 +1,8 @@
 package com.mahghuuls.elusiveflora.world;
 
 import com.mahghuuls.elusiveflora.roster.DimensionKind;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -8,20 +10,21 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 /**
- * Finds the position a surface plant would occupy in a column: the first air block above the
- * highest ground. The Overworld and the End start from the height map, which stops at the first
- * block that lets light through, so a snow layer, tall grass, or a flower on top is stepped over
- * (a few blocks at most) and the ground rule then judges what is below. The Nether has a bedrock
- * roof, so its "surface" is any floor with air above it, found by scanning down from a random
- * height the way the Nether's own decorators do.
+ * Finds the position a surface plant would occupy in a column. The Overworld and the End start
+ * from the height map, which names the position just above the highest block that blocks light.
+ * That position is air on bare ground. It is a thin snow layer in snowy places, and the plant
+ * replaces that layer: it stands in the snow on the ground below, the way a vanilla flower stands
+ * in a gap in the snow; standing on top of the layer would leave it floating above two pixels of
+ * snow. Any other cover there (tall grass, a flower, thick snow) makes the column unusable. The
+ * Nether has a bedrock roof, so its "surface" is any floor with air above it, found by scanning
+ * down from a random height the way the Nether's own decorators do.
+ *
+ * <p>The returned position is always free for a plant: air, or a thin snow layer to replace.
  */
 final class SurfaceFinder {
 
     private static final int NETHER_MIN_Y = 8;
     private static final int NETHER_MAX_Y = 120;
-
-    /** How far above the height map a transparent cover (snow layer, grass) may be stepped over. */
-    private static final int COVER_STEPS = 3;
 
     private SurfaceFinder() {
     }
@@ -43,9 +46,12 @@ final class SurfaceFinder {
         if (top.getY() <= 0) {
             return null;
         }
-        for (int step = 0; step < COVER_STEPS && !world.isAirBlock(top); step++) {
-            top = top.up();
-        }
-        return world.isAirBlock(top) ? top : null;
+        return world.isAirBlock(top) || isThinSnow(world, top) ? top : null;
+    }
+
+    /** A one-layer snow cover, which the game itself lets any placed block replace. */
+    private static boolean isThinSnow(World world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos);
+        return state.getBlock() == Blocks.SNOW_LAYER && state.getBlock().isReplaceable(world, pos);
     }
 }

@@ -29,7 +29,7 @@ import java.util.Set;
  * Optional modifiers: {@code near_lava}, {@code near_water}, {@code sea_level}, {@code min_y:<n>}.
  *
  * <p>Ground keywords are vanilla block paths ({@code grass}, {@code dirt}, {@code sand},
- * {@code snow}, {@code snow_layer}, {@code mycelium}, {@code soul_sand}, {@code netherrack},
+ * {@code snow}, {@code mycelium}, {@code soul_sand}, {@code netherrack},
  * {@code end_stone}, {@code stone}), a full registry name such as
  * {@code aether_legacy:aether_grass}, or {@code any_solid}. {@code dirt} covers dirt, coarse dirt,
  * and podzol; {@code stone} covers every stone variant.
@@ -48,8 +48,11 @@ public final class GroundRule {
     public static final String ANY_SOLID = "any_solid";
 
     private static final Set<String> VANILLA_GROUND = new HashSet<String>(Arrays.asList(
-            "grass", "dirt", "sand", "snow", "snow_layer", "mycelium", "soul_sand",
+            "grass", "dirt", "sand", "snow", "mycelium", "soul_sand",
             "netherrack", "end_stone", "stone", ANY_SOLID));
+
+    /** Never ground: world generation replaces a thin snow layer instead of standing on it. */
+    private static final String THIN_SNOW = "minecraft:snow_layer";
 
     private final PlacementKind kind;
     private final List<String> groundKeywords;
@@ -153,6 +156,10 @@ public final class GroundRule {
             boolean registryName = colon > 0 && colon < keyword.length() - 1;
             if (!registryName && !VANILLA_GROUND.contains(keyword)) {
                 throw new RosterException(rowId, "ground", "unknown ground keyword '" + keyword + "'");
+            }
+            if (keyword.equals(THIN_SNOW)) {
+                throw new RosterException(rowId, "ground", "'" + keyword + "' is not ground: a plant on a"
+                        + " snow layer floats; generation replaces thin snow and judges the block below");
             }
         }
         return Arrays.asList(parts);
@@ -311,7 +318,6 @@ public final class GroundRule {
             case "dirt": return Blocks.DIRT;
             case "sand": return Blocks.SAND;
             case "snow": return Blocks.SNOW;
-            case "snow_layer": return Blocks.SNOW_LAYER;
             case "mycelium": return Blocks.MYCELIUM;
             case "soul_sand": return Blocks.SOUL_SAND;
             case "netherrack": return Blocks.NETHERRACK;

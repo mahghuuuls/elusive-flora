@@ -60,7 +60,7 @@ public final class PlantWorldGenerator implements IWorldGenerator {
                 int x = chunkX * 16 + 8 + random.nextInt(16);
                 int z = chunkZ * 16 + 8 + random.nextInt(16);
                 BlockPos pos = SurfaceFinder.find(world, plant.dimension(), x, z, random);
-                if (pos == null || !world.isAirBlock(pos)) {
+                if (pos == null) {
                     continue;
                 }
                 if (check.check(world, pos, plant, false) != null) {

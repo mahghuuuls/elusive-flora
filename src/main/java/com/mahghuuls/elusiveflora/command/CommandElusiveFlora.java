@@ -26,9 +26,9 @@ import java.util.List;
  *
  * <p>The position checked is the block the player's feet occupy, so the ground rule looks at the
  * block stood on. The five rules are the whole answer; the generator additionally needs that
- * position to be air, so an operator standing in tall grass, a snow layer, or water may read
- * "can appear here" for a spot generation would skip. Stand on a bare block to ask the exact
- * question generation asks.
+ * position to be free (air, or a thin snow layer it replaces), so an operator standing in tall
+ * grass or water may read "can appear here" for a spot generation would skip. Stand on a bare
+ * block to ask the exact question generation asks.
  */
 public final class CommandElusiveFlora extends CommandBase {
 

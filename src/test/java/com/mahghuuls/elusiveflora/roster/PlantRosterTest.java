@@ -31,7 +31,7 @@ class PlantRosterTest {
             + "model,glow_light,showcase\n";
 
     private static final String GOOD_ROW =
-            "frostbell,Frostbell,approved,overworld,snow (8),SNOWY,,on:snow|snow_layer,always,uncommon,10,2,1,flat,0,no\n";
+            "frostbell,Frostbell,approved,overworld,snow (8),SNOWY,,on:snow|grass|dirt,always,uncommon,10,2,1,flat,0,no\n";
 
     @Test
     void shippedRosterHasTheTwentyTwoApprovedPlantsInOrder() {
@@ -87,7 +87,7 @@ class PlantRosterTest {
 
     @Test
     void unknownGroundKeywordNamesTheRowAndColumn() {
-        String row = GOOD_ROW.replace("on:snow|snow_layer", "on:snow|marble");
+        String row = GOOD_ROW.replace("on:snow|grass|dirt", "on:snow|marble");
         RosterException e = assertThrows(RosterException.class,
                 () -> PlantRoster.load(new StringReader(HEADER + row)));
         assertTrue(e.getMessage().contains("row 'frostbell'"), e.getMessage());

@@ -94,6 +94,15 @@ class GroundRuleTest {
         assertThrows(RosterException.class, () -> GroundRule.parse("frostbell", "on:grass;floating"));
     }
 
+    /** A plant standing on a thin snow layer would float; generation replaces the layer instead. */
+    @Test
+    void snowLayerIsNotGround() {
+        RosterException layer = assertThrows(RosterException.class,
+                () -> GroundRule.parse("frostbell", "on:snow|snow_layer"));
+        assertTrue(layer.getMessage().contains("snow_layer"));
+        assertThrows(RosterException.class, () -> GroundRule.parse("frostbell", "on:minecraft:snow_layer"));
+    }
+
     @Test
     void missingOrDoublePlacementFails() {
         assertThrows(RosterException.class, () -> GroundRule.parse("x", "near_lava"));

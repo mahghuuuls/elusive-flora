@@ -5,7 +5,7 @@ streamreed,Streamreed,approved,overworld,river or lake bed (3),RIVER,,water_bed:
 tideheart,Tideheart,approved,overworld,beach at the water line (4),BEACH,,on:sand;sea_level;near_water,always,uncommon,10,2,1,flat,0,no
 skyclover,Skyclover,approved,overworld,mountain top (5),MOUNTAIN|HILLS,,on:grass|stone;min_y:110,always,rare,4,3,1,flat,0,no
 canopytear,Canopy Tear,approved,overworld,on a tree trunk (7),JUNGLE,,side:log,always,rare,4,3,1,flat,0,no
-frostbell,Frostbell,approved,overworld,special ground snow (8),SNOWY,,on:snow|snow_layer,always,uncommon,10,2,1,flat,0,no
+frostbell,Frostbell,approved,overworld,special ground snow (8),SNOWY,,on:snow|grass|dirt,always,uncommon,10,2,1,flat,0,no
 sporecap,Sporecap,approved,overworld,special ground mycelium (8),MUSHROOM,,on:mycelium,always,very rare,2,4,1,flat,0,no
 emberroot,Emberroot,approved,overworld,next to surface lava (9),*,,on:any_solid;near_lava,always,very rare,2,4,1,flat,3,no
 duskwisp,Duskwisp,approved,overworld,opens at night and glows (12),FOREST|SPOOKY,,on:grass|dirt,night,uncommon,10,2,1,flat,9,no
