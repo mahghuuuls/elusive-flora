@@ -24,7 +24,7 @@ class GroundRuleTest {
 
     @Test
     void groundClauseWithModifiers() {
-        GroundRule rule = GroundRule.parse("tideheart", "on:sand;sea_level;near_water");
+        GroundRule rule = GroundRule.parse("shoreplant", "on:sand;sea_level;near_water");
         assertTrue(rule.seaLevel());
         assertTrue(rule.nearWater());
         assertFalse(rule.nearLava());

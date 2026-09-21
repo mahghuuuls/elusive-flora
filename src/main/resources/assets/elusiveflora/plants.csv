@@ -2,7 +2,7 @@ id,display_name,status,dimension,situation_rule,biome_types,biome_names,ground,c
 ledgebloom,Ledgebloom,approved,overworld,cliff face (6),MOUNTAIN|HILLS,,side:stone,always,rare,4,3,1,3d,0,yes
 pearlfrond,Pearlfrond,approved,overworld,ocean floor deep water (2),OCEAN,,water_bed:8+,always,rare,4,3,1,3d,10,yes
 streamreed,Streamreed,approved,overworld,river or lake bed (3),RIVER,,water_bed:2-4,always,uncommon,10,2,1,flat,0,no
-tideheart,Tideheart,approved,overworld,beach at the water line (4),BEACH,,on:sand;sea_level;near_water,always,uncommon,10,2,1,flat,0,no
+tideheart,Tideheart,approved,overworld,shallow sea bed near the shore (4),BEACH|OCEAN,,water_bed:2-4,always,uncommon,10,2,1,flat,0,no
 skyclover,Skyclover,approved,overworld,mountain top (5),MOUNTAIN|HILLS,,on:grass|stone;min_y:110,always,rare,4,3,1,flat,0,no
 canopytear,Canopy Tear,approved,overworld,on a tree trunk (7),JUNGLE,,side:log,always,rare,4,3,1,flat,0,no
 frostbell,Frostbell,approved,overworld,special ground snow (8),SNOWY,,on:snow|grass|dirt,always,uncommon,10,2,1,flat,0,no
