@@ -1,7 +1,7 @@
 {
   "variants": {
-    "stage=stem": { "model": "elusiveflora:placeholder_stem" },
-    "stage=dormant": { "model": "elusiveflora:placeholder_dormant" },
-    "stage=bloom": { "model": "elusiveflora:placeholder_bloom" }
+    "stage=stem": { "model": "elusiveflora:duskwisp_stem" },
+    "stage=dormant": { "model": "elusiveflora:duskwisp_dormant" },
+    "stage=bloom": { "model": "elusiveflora:duskwisp_bloom" }
   }
 }

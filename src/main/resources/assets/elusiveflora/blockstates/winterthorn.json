@@ -1,7 +1,7 @@
 {
   "variants": {
-    "stage=stem": { "model": "elusiveflora:placeholder_stem" },
-    "stage=dormant": { "model": "elusiveflora:placeholder_dormant" },
-    "stage=bloom": { "model": "elusiveflora:placeholder_bloom" }
+    "stage=stem": { "model": "elusiveflora:winterthorn_stem" },
+    "stage=dormant": { "model": "elusiveflora:winterthorn_dormant" },
+    "stage=bloom": { "model": "elusiveflora:winterthorn_bloom" }
   }
 }

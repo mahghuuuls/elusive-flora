@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Arrays;
@@ -36,7 +37,9 @@ import java.util.Set;
  *
  * <p>Callers ask this class whether a position qualifies; they do not interpret the parsed fields
  * themselves. The world-facing check that applies the keywords and modifiers to blocks belongs
- * here too and is added with the first block slice. The getters below exist for tests, diagnostics,
+ * here too. Mind the two meanings of stone: {@code on:stone} is the stone block and its variants,
+ * while {@code side:stone} is any block of rock material, because a cliff is made of ores and
+ * andesite as much as of stone. The modifiers belong to {@code on:} only. The getters below exist for tests, diagnostics,
  * and the check tool's reason text, not for re-implementing the rule elsewhere.
  */
 public final class GroundRule {
@@ -130,6 +133,11 @@ public final class GroundRule {
         if (kind == null) {
             throw new RosterException(rowId, "ground",
                     "no placement clause (expected on:, side:, or water_bed:)");
+        }
+        boolean hasModifier = nearLava || nearWater || seaLevel || minY != NO_MIN_Y;
+        if (hasModifier && kind != PlacementKind.GROUND) {
+            throw new RosterException(rowId, "ground",
+                    "near_lava, near_water, sea_level, and min_y work with on: only");
         }
         return new GroundRule(kind, keywords, side, minDepth, maxDepth, nearLava, nearWater,
                 seaLevel, minY);
@@ -258,16 +266,107 @@ public final class GroundRule {
      * world-facing owner of the ground grammar: the generator asks it before placing, the block
      * asks it to decide whether it may stay after a neighbor changes.
      *
-     * <p>Ground rules ({@code on:}) look at the block below the plant and at the modifiers. The
-     * attached and water kinds are answered by their own slices; until then they never match.
+     * <p>Ground rules ({@code on:}) look at the block below the plant and at the modifiers.
+     * Attached rules ({@code side:}) need one horizontal neighbor to hold the plant. Water rules
+     * ({@code water_bed:}) need a natural floor below and a water column of the right depth.
      */
     public boolean matches(World world, BlockPos plantPos) {
         switch (kind) {
             case GROUND:
                 return matchesGround(world, plantPos);
+            case ATTACHED:
+                return facingToAttach(world, plantPos) != null;
+            case WATER:
+                return matchesWaterBed(world, plantPos);
             default:
-                return false;
+                throw new IllegalStateException("no placement rule for " + kind);
         }
+    }
+
+    /**
+     * The way an attached plant at this position would point: away from the first horizontal
+     * neighbor that is an attachable face of this rule's side kind. Null when no neighbor
+     * qualifies, or when this is not an attached rule.
+     */
+    public EnumFacing facingToAttach(IBlockAccess world, BlockPos plantPos) {
+        for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+            if (supportsFacing(world, plantPos, facing)) {
+                return facing;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Whether a plant pointing {@code facing} is held here: the block behind it is this rule's
+     * side material and turns a solid face toward the plant. Stone is any rock material, natural
+     * or built; a log is whatever the game calls wood of a tree, so planks do not count.
+     */
+    public boolean supportsFacing(IBlockAccess world, BlockPos plantPos, EnumFacing facing) {
+        if (sideKind == null) {
+            return false;
+        }
+        BlockPos supportPos = plantPos.offset(facing.getOpposite());
+        IBlockState support = world.getBlockState(supportPos);
+        boolean rightMaterial = sideKind == SideKind.STONE
+                ? support.getMaterial() == Material.ROCK
+                : support.getBlock().isWood(world, supportPos);
+        return rightMaterial && support.isSideSolid(world, supportPos, facing);
+    }
+
+    /**
+     * Whether a water plant standing at {@code plantPos} is still held: the bed under it is a
+     * natural floor (sand, gravel, dirt, clay, or rock material with a solid top) and there is
+     * still water beside or above it. Depth is a rule for where a plant appears, not for whether
+     * it may stay, so winter ice or a bridge pillar above does not uproot it.
+     */
+    public boolean holdsInWater(IBlockAccess world, BlockPos plantPos) {
+        return kind == PlacementKind.WATER && isBed(world, plantPos.down()) && hasWaterBeside(world, plantPos);
+    }
+
+    /** True when water touches the position from above or from a side; false in a drained place. */
+    public static boolean hasWaterBeside(IBlockAccess world, BlockPos pos) {
+        if (isWater(world, pos.up())) {
+            return true;
+        }
+        for (EnumFacing side : EnumFacing.HORIZONTALS) {
+            if (isWater(world, pos.offset(side))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** The water kind's placement rule: a held position whose water column is within the range. Package-private for tests. */
+    boolean matchesWaterBed(IBlockAccess world, BlockPos plantPos) {
+        return holdsInWater(world, plantPos) && acceptsDepth(waterDepth(world, plantPos));
+    }
+
+    /**
+     * Water-material blocks from the plant's position upward, the position itself included. The
+     * count stops one past what the range needs, so a deep ocean costs no more than a pond.
+     */
+    private int waterDepth(IBlockAccess world, BlockPos plantPos) {
+        int enough = maxDepth == UNBOUNDED ? minDepth : maxDepth + 1;
+        int depth = 0;
+        BlockPos pos = plantPos;
+        while (depth < enough && isWater(world, pos)) {
+            depth++;
+            pos = pos.up();
+        }
+        return depth;
+    }
+
+    private static boolean isWater(IBlockAccess world, BlockPos pos) {
+        return world.getBlockState(pos).getMaterial() == Material.WATER;
+    }
+
+    private static boolean isBed(IBlockAccess world, BlockPos bedPos) {
+        IBlockState bed = world.getBlockState(bedPos);
+        Material material = bed.getMaterial();
+        boolean floorMaterial = material == Material.SAND || material == Material.GROUND
+                || material == Material.CLAY || material == Material.ROCK;
+        return floorMaterial && bed.isSideSolid(world, bedPos, EnumFacing.UP);
     }
 
     private boolean matchesGround(World world, BlockPos plantPos) {

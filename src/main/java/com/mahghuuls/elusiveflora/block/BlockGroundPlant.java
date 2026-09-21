@@ -1,6 +1,7 @@
 package com.mahghuuls.elusiveflora.block;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -12,7 +13,7 @@ public class BlockGroundPlant extends BlockPlantBase {
     }
 
     @Override
-    public boolean canStay(World world, BlockPos pos) {
+    protected boolean canStay(World world, BlockPos pos, IBlockState state) {
         return lifecycle.plant().groundRule().matches(world, pos);
     }
 }

@@ -69,7 +69,6 @@ public final class PlacementCheck {
      */
     public Reason check(final World world, final BlockPos pos, final PlantDefinition plant, boolean includeCondition) {
         final PlantSettings settings = registry.settings(plant);
-        final ResolvedBiomeRule biomeRule = registry.biomeRuleOf(plant);
         return firstFailure(new Rules() {
             @Override
             public boolean enabled() {
@@ -83,7 +82,7 @@ public final class PlacementCheck {
 
             @Override
             public boolean biome() {
-                return biomeRule != null && biomeRule.matches(world.getBiome(pos));
+                return biomeAllows(world, pos, plant);
             }
 
             @Override
@@ -96,6 +95,16 @@ public final class PlacementCheck {
                 return plant.condition().isMet(world, pos, seasons);
             }
         }, includeCondition);
+    }
+
+    /**
+     * The biome rule alone, which depends on the column and not on the height. World generation
+     * asks it before it searches a column for a position, because that search is the costly part
+     * and most columns of most chunks are in the wrong biome.
+     */
+    public boolean biomeAllows(World world, BlockPos column, PlantDefinition plant) {
+        ResolvedBiomeRule biomeRule = registry.biomeRuleOf(plant);
+        return biomeRule != null && biomeRule.matches(world.getBiome(column));
     }
 
     /** The rule order itself, world-free so it can be tested. */

@@ -1,5 +1,6 @@
 package com.mahghuuls.elusiveflora.roster;
 
+import com.mahghuuls.elusiveflora.season.Season;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,6 +34,19 @@ class ConditionTest {
         assertEquals(7, Condition.moonPhase(24000 * 7));
         assertEquals(0, Condition.moonPhase(24000 * 8));
         assertEquals(4, Condition.moonPhase(24000 * 12 + 15000));
+    }
+
+    /** A season plant is open in its own season, closed in the other three, and open when no season applies. */
+    @Test
+    void seasonPlantsFollowTheReportedSeason() {
+        assertTrue(Condition.WINTER.isMet(null, null, world -> Season.WINTER));
+        assertFalse(Condition.SPRING.isMet(null, null, world -> Season.WINTER));
+        assertFalse(Condition.SUMMER.isMet(null, null, world -> Season.WINTER));
+        assertFalse(Condition.AUTUMN.isMet(null, null, world -> Season.WINTER));
+        assertTrue(Condition.AUTUMN.isMet(null, null, world -> Season.AUTUMN));
+        for (Condition season : new Condition[] {Condition.SPRING, Condition.SUMMER, Condition.AUTUMN, Condition.WINTER}) {
+            assertTrue(season.isMet(null, null, world -> null), season + " with no season must be in bloom");
+        }
     }
 
     @Test

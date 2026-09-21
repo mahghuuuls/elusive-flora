@@ -51,6 +51,26 @@ class SourceRulesTest {
         assertTrue(offenders.isEmpty(), "crop growth hooks: " + offenders);
     }
 
+    /** One class may name Serene Seasons, so an API change there touches one file and nothing else loads its classes. */
+    @Test
+    void sereneSeasonsIsNamedOnlyInItsBridge() throws IOException {
+        List<String> offenders = new ArrayList<String>();
+        try (Stream<Path> files = Files.walk(MAIN)) {
+            files.filter(p -> p.toString().endsWith(".java"))
+                    .filter(p -> !p.getFileName().toString().equals("SereneSeasonsBridge.java"))
+                    .forEach(p -> {
+                        // The package token, not the import keyword: a static import or a fully
+                        // qualified name counts too. The mod id has no trailing dot, so it passes.
+                        if (read(p).contains("sereneseasons.")) {
+                            offenders.add(p.toString());
+                        }
+                    });
+        }
+        assertTrue(offenders.isEmpty(), "Serene Seasons classes named outside the bridge: " + offenders);
+        assertTrue(read(MAIN.resolve("season").resolve("SereneSeasonsBridge.java")).contains("import sereneseasons."),
+                "the bridge itself must exist and use the API, or this scan proves nothing");
+    }
+
     private static final String File_SEPARATOR = java.io.File.separator;
 
     private static String read(Path path) {

@@ -103,6 +103,15 @@ class GroundRuleTest {
         assertThrows(RosterException.class, () -> GroundRule.parse("frostbell", "on:minecraft:snow_layer"));
     }
 
+    /** A modifier on a wall or water rule would be read and then ignored; the roster must not lie. */
+    @Test
+    void modifiersBelongToGroundRulesOnly() {
+        assertThrows(RosterException.class, () -> GroundRule.parse("ledgebloom", "side:stone;min_y:90"));
+        assertThrows(RosterException.class, () -> GroundRule.parse("canopytear", "side:log;near_water"));
+        assertThrows(RosterException.class, () -> GroundRule.parse("pearlfrond", "water_bed:8+;sea_level"));
+        GroundRule.parse("skyclover", "on:grass;min_y:110");
+    }
+
     @Test
     void missingOrDoublePlacementFails() {
         assertThrows(RosterException.class, () -> GroundRule.parse("x", "near_lava"));

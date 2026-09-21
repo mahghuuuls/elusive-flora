@@ -4,11 +4,13 @@ import com.mahghuuls.elusiveflora.Tags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -17,12 +19,15 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -40,7 +45,7 @@ public abstract class BlockPlantBase extends Block {
     private static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.6D, 0.7D);
 
     /** Dirt's hardness: about one and a half seconds by hand. */
-    static final float STEM_HARDNESS = 1.0F;
+    private static final float STEM_HARDNESS = 1.0F;
 
     protected final PlantLifecycle lifecycle;
 
@@ -59,8 +64,40 @@ public abstract class BlockPlantBase extends Block {
         return lifecycle;
     }
 
-    /** Whether the plant may stand here now; the placement kind's ground rule. */
-    public abstract boolean canStay(World world, BlockPos pos);
+    /**
+     * Whether this placed plant, in this state, is still held where it stands. Asked when a
+     * neighbor changes and on every tick; a plant that is not held is removed without a drop.
+     */
+    protected abstract boolean canStay(World world, BlockPos pos, IBlockState state);
+
+    /** How hard a stem is to break; a placement kind where breaking is slower anyway may lower it. */
+    protected float stemHardness() {
+        return STEM_HARDNESS;
+    }
+
+    /**
+     * State properties that exist for the game's sake and have no look of their own, so the
+     * blockstate files need not list them. None, unless the placement kind carries one.
+     */
+    public Collection<IProperty<?>> propertiesWithoutLook() {
+        return Collections.<IProperty<?>>emptyList();
+    }
+
+    /**
+     * What takes the plant's place when it goes for good: a broken stem, a lost support, an
+     * explosion. Air, unless the placement kind stands in something else.
+     */
+    protected IBlockState stateWhenGone(World world, BlockPos pos) {
+        return Blocks.AIR.getDefaultState();
+    }
+
+    /**
+     * The state world generation places at a position the ground rule has accepted. A placement
+     * kind with more than a stage to decide (which wall to grow from) adds it here.
+     */
+    public IBlockState placedState(World world, BlockPos pos, PlantStage stage) {
+        return getDefaultState().withProperty(STAGE, stage);
+    }
 
     // Stage property and metadata.
 
@@ -98,8 +135,8 @@ public abstract class BlockPlantBase extends Block {
         if (world.isRemote) {
             return;
         }
-        if (!canStay(world, pos)) {
-            world.setBlockToAir(pos);
+        if (!canStay(world, pos, state)) {
+            world.setBlockState(pos, stateWhenGone(world, pos), 3);
             return;
         }
         lifecycle.tick(world, pos, state);
@@ -117,19 +154,21 @@ public abstract class BlockPlantBase extends Block {
      */
     @Override
     public float getBlockHardness(IBlockState state, World world, BlockPos pos) {
-        return state.getValue(STAGE) == PlantStage.STEM ? STEM_HARDNESS : 0.0F;
+        return state.getValue(STAGE) == PlantStage.STEM ? stemHardness() : 0.0F;
     }
 
     /**
-     * The pick path. Returning false keeps the block in place (now a stem) and skips the vanilla
-     * harvest, so the lifecycle owns the drop; returning true lets vanilla remove a stem, which
-     * drops nothing because {@link #getDrops} adds nothing.
+     * The pick path. A plant becomes a stem and stays: returning false keeps the block in place
+     * and skips the vanilla harvest, so the lifecycle owns the drop. A stem is removed for good,
+     * and drops nothing because {@link #getDrops} adds nothing.
      */
     @Override
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         boolean drop = !player.capabilities.isCreativeMode;
         if (lifecycle.onBroken(world, pos, state, drop)) {
-            return super.removedByPlayer(state, world, pos, player, willHarvest);
+            // What Forge's default does, with the plant's own idea of "gone" in place of air.
+            onBlockHarvested(world, pos, state, player);
+            return world.setBlockState(pos, stateWhenGone(world, pos), world.isRemote ? 11 : 3);
         }
         return false;
     }
@@ -137,6 +176,12 @@ public abstract class BlockPlantBase extends Block {
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         // Drops happen in the lifecycle at pick time; explosions and other removals yield nothing.
+    }
+
+    @Override
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+        world.setBlockState(pos, stateWhenGone(world, pos), 3);
+        onExplosionDestroy(world, pos, explosion);
     }
 
     @Override
@@ -153,13 +198,13 @@ public abstract class BlockPlantBase extends Block {
 
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return super.canPlaceBlockAt(world, pos) && canStay(world, pos);
+        return super.canPlaceBlockAt(world, pos) && lifecycle.plant().groundRule().matches(world, pos);
     }
 
     @Override
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
-        if (!world.isRemote && !canStay(world, pos)) {
-            world.setBlockToAir(pos);
+        if (!world.isRemote && !canStay(world, pos, state)) {
+            world.setBlockState(pos, stateWhenGone(world, pos), 3);
         }
     }
 

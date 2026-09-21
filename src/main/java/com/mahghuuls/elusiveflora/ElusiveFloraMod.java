@@ -5,8 +5,8 @@ import com.mahghuuls.elusiveflora.command.CommandElusiveFlora;
 import com.mahghuuls.elusiveflora.config.ElusiveFloraConfig;
 import com.mahghuuls.elusiveflora.registry.PlantRegistry;
 import com.mahghuuls.elusiveflora.roster.PlantRoster;
-import com.mahghuuls.elusiveflora.season.NoSeasonBridge;
 import com.mahghuuls.elusiveflora.season.SeasonBridge;
+import com.mahghuuls.elusiveflora.season.SeasonBridges;
 import com.mahghuuls.elusiveflora.world.PlacementCheck;
 import com.mahghuuls.elusiveflora.world.PlantWorldGenerator;
 import net.minecraft.util.ResourceLocation;
@@ -55,13 +55,12 @@ public class ElusiveFloraMod {
         ElusiveFloraLog.LOGGER.info("{} {} loading", Tags.MOD_NAME, Tags.VERSION);
         PlantRoster roster = PlantRoster.load();
         ElusiveFloraConfig config = ElusiveFloraConfig.load(event.getSuggestedConfigurationFile(), roster);
-        SeasonBridge seasons = new NoSeasonBridge();
+        SeasonBridge seasons = SeasonBridges.detect();
         registry = new PlantRegistry(roster, config, seasons);
         placementCheck = new PlacementCheck(registry, seasons);
         GameRegistry.registerTileEntity(TileEntityStem.class, new ResourceLocation(Tags.MOD_ID, "stem"));
         GameRegistry.registerWorldGenerator(new PlantWorldGenerator(registry, placementCheck), 10);
-        ElusiveFloraLog.LOGGER.info("{} plants in the roster, {} with a block class", roster.size(),
-                registry.blocks().size());
+        ElusiveFloraLog.LOGGER.info("{} plants registered", registry.blocks().size());
     }
 
     @Mod.EventHandler

@@ -26,9 +26,10 @@ import java.util.List;
  *
  * <p>The position checked is the block the player's feet occupy, so the ground rule looks at the
  * block stood on. The five rules are the whole answer; the generator additionally needs that
- * position to be free (air, or a thin snow layer it replaces), so an operator standing in tall
- * grass or water may read "can appear here" for a spot generation would skip. Stand on a bare
- * block to ask the exact question generation asks.
+ * position to be free (air, or a thin snow layer it replaces) and, for a plant that grows from a
+ * wall, to hang above the ground. So an operator standing in tall grass, in water, or on the
+ * ground beside a cliff may read "can appear here" for a spot generation would skip. Stand on a
+ * bare block to ask the exact question generation asks for a ground plant.
  */
 public final class CommandElusiveFlora extends CommandBase {
 
@@ -84,10 +85,6 @@ public final class CommandElusiveFlora extends CommandBase {
         sender.sendMessage(new TextComponentString("Elusive Flora at " + pos.getX() + " " + pos.getY() + " " + pos.getZ()
                 + " in " + biomeName(world, pos) + ":"));
         for (PlantDefinition plant : registry.plants()) {
-            if (registry.blockOf(plant) == null) {
-                sender.sendMessage(new TextComponentString(plant.displayName() + ": not placeable yet (no block class)"));
-                continue;
-            }
             sender.sendMessage(new TextComponentString(lineFor(plant.displayName(), check.check(world, pos, plant, true))));
         }
     }

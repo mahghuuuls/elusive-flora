@@ -1,8 +1,10 @@
 package com.mahghuuls.elusiveflora.registry;
 
 import com.mahghuuls.elusiveflora.ElusiveFloraLog;
+import com.mahghuuls.elusiveflora.block.BlockAttachedPlant;
 import com.mahghuuls.elusiveflora.block.BlockGroundPlant;
 import com.mahghuuls.elusiveflora.block.BlockPlantBase;
+import com.mahghuuls.elusiveflora.block.BlockWaterPlant;
 import com.mahghuuls.elusiveflora.block.PlantLifecycle;
 import com.mahghuuls.elusiveflora.config.ElusiveFloraConfig;
 import com.mahghuuls.elusiveflora.config.PlantSettings;
@@ -45,10 +47,7 @@ public final class PlantRegistry {
             ItemPickedPlant item = new ItemPickedPlant(plant);
             items.put(plant.id(), item);
             PlantLifecycle lifecycle = new PlantLifecycle(plant, item, seasons, scale);
-            BlockPlantBase block = createBlock(plant, lifecycle);
-            if (block != null) {
-                blocks.put(plant.id(), block);
-            }
+            blocks.put(plant.id(), createBlock(plant, lifecycle));
         }
         creativeTab = new ModCreativeTab(items.values().iterator().next());
         for (ItemPickedPlant item : items.values()) {
@@ -57,17 +56,19 @@ public final class PlantRegistry {
     }
 
     /**
-     * The block class for a placement kind. Attached and water plants arrive with their own
-     * slices; until then they have no block, are never placed, and log once.
+     * The block class for a placement kind. Material and state properties are fixed per block
+     * class in this game version, which is why there are three.
      */
     private static BlockPlantBase createBlock(PlantDefinition plant, PlantLifecycle lifecycle) {
         switch (plant.placementKind()) {
             case GROUND:
                 return new BlockGroundPlant(lifecycle);
+            case ATTACHED:
+                return new BlockAttachedPlant(lifecycle);
+            case WATER:
+                return new BlockWaterPlant(lifecycle);
             default:
-                ElusiveFloraLog.LOGGER.info("Plant {} ({} kind) has no block class yet; not placed",
-                        plant.id(), plant.placementKind());
-                return null;
+                throw new IllegalStateException("no block class for " + plant.placementKind());
         }
     }
 

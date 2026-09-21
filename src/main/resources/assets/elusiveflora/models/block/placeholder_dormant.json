@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "elusiveflora:blocks/placeholder_dormant"
-  }
-}

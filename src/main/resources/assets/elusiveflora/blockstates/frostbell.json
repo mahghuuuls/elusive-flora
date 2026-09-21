@@ -1,7 +1,7 @@
 {
   "variants": {
-    "stage=stem": { "model": "elusiveflora:placeholder_stem" },
-    "stage=dormant": { "model": "elusiveflora:placeholder_bloom" },
-    "stage=bloom": { "model": "elusiveflora:placeholder_bloom" }
+    "stage=stem": { "model": "elusiveflora:frostbell_stem" },
+    "stage=dormant": { "model": "elusiveflora:frostbell_bloom" },
+    "stage=bloom": { "model": "elusiveflora:frostbell_bloom" }
   }
 }

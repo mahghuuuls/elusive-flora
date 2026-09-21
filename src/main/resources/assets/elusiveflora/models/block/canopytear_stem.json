@@ -1,0 +1,6 @@
+{
+  "parent": "elusiveflora:block/wall_plant",
+  "textures": {
+    "plant": "elusiveflora:blocks/canopytear_stem"
+  }
+}

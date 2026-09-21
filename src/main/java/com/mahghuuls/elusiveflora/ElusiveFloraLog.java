@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The mod's one logger, plus a once-only warning for problems that would otherwise repeat every
- * chunk or tick: an unknown biome name in config, an integration that stopped answering.
+ * chunk or tick, such as an unknown biome name in config.
  */
 public final class ElusiveFloraLog {
 
