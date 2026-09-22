@@ -1,0 +1,7 @@
+{
+  "processor": "com.mahghuuls.elusiveflora.client.journal.PlantEntryProcessor",
+  "components": [
+    { "type": "header", "text": "Where it grows", "x": -1, "y": 0 },
+    { "type": "text", "text": "#biomes", "x": 0, "y": 22 }
+  ]
+}

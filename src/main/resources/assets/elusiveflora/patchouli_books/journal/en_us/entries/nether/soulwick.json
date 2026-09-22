@@ -1,0 +1,23 @@
+{
+  "name": "Soulwick",
+  "category": "nether",
+  "icon": "elusiveflora:soulwick",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "soulwick",
+      "name": "Soulwick",
+      "item": "elusiveflora:soulwick",
+      "hint": "Grows on soul sand in the Nether."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "soulwick"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "soulwick"
+    }
+  ]
+}

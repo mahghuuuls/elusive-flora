@@ -1,0 +1,23 @@
+{
+  "name": "Cloudfern",
+  "category": "aether",
+  "icon": "elusiveflora:cloudfern",
+  "sortnum": 70,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "cloudfern",
+      "name": "Cloudfern",
+      "item": "elusiveflora:cloudfern",
+      "hint": "Grows on Aether grass on the sky islands. It is found nowhere else."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "cloudfern"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "cloudfern"
+    }
+  ]
+}

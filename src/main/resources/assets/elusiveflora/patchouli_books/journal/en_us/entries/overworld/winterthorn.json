@@ -1,0 +1,24 @@
+{
+  "name": "Winterthorn",
+  "category": "overworld",
+  "icon": "elusiveflora:winterthorn",
+  "sortnum": 33,
+  "flag": "mod:sereneseasons",
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "winterthorn",
+      "name": "Winterthorn",
+      "item": "elusiveflora:winterthorn",
+      "hint": "Grows on grass, dirt, and snow in cold and pine biomes. It opens in winter only."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "winterthorn"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "winterthorn"
+    }
+  ]
+}

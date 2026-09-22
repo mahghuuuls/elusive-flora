@@ -1,0 +1,9 @@
+{
+  "name": "Elusive Flora Journal",
+  "landing_text": "Notes on rare plants. Each grows only in its own kind of place, and some open only at certain times. Pick one and it drops one of itself; a stem stays and grows back in time. Plants cannot be moved or farmed. These notes say what kind of place to look in, never where exactly.",
+  "subtitle": "Where the rare plants grow",
+  "version": "1",
+  "creative_tab": "elusiveflora",
+  "show_progress": false,
+  "pause_game": false
+}

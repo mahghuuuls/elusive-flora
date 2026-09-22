@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +21,8 @@ import java.util.Set;
  */
 public final class ResolvedBiomeRule {
 
-    private static final Map<Biome, Set<String>> TYPE_NAMES = new HashMap<Biome, Set<String>>();
+    // Filled from the server thread during generation and from the client thread by the journal.
+    private static final Map<Biome, Set<String>> TYPE_NAMES = new ConcurrentHashMap<Biome, Set<String>>();
 
     private final BiomeRule rule;
     private final boolean anyInstalled;

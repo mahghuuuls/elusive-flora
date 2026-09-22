@@ -1,0 +1,23 @@
+{
+  "name": "Frostbell",
+  "category": "overworld",
+  "icon": "elusiveflora:frostbell",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "frostbell",
+      "name": "Frostbell",
+      "item": "elusiveflora:frostbell",
+      "hint": "Grows on the ground in snowy biomes, in a gap in the snow cover."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "frostbell"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "frostbell"
+    }
+  ]
+}

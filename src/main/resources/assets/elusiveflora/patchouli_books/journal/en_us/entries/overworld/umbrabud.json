@@ -1,0 +1,23 @@
+{
+  "name": "Umbrabud",
+  "category": "overworld",
+  "icon": "elusiveflora:umbrabud",
+  "sortnum": 41,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "umbrabud",
+      "name": "Umbrabud",
+      "item": "elusiveflora:umbrabud",
+      "hint": "Grows on grass and dirt in spooky and dead biomes. It opens only on the night of a new moon."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "umbrabud"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "umbrabud"
+    }
+  ]
+}

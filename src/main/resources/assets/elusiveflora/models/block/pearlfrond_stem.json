@@ -1,0 +1,18 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "elusiveflora:blocks/pearlfrond_parts",
+    "frond": "elusiveflora:blocks/pearlfrond_frond",
+    "parts": "elusiveflora:blocks/pearlfrond_parts"
+  },
+  "elements": [
+    { "name": "holdfast", "from": [5, 0, 5], "to": [11, 1, 11], "faces": {
+      "up": { "uv": [8, 0, 16, 8], "texture": "#parts" },
+      "north": { "uv": [8, 0, 16, 8], "texture": "#parts" }, "south": { "uv": [8, 0, 16, 8], "texture": "#parts" },
+      "west": { "uv": [8, 0, 16, 8], "texture": "#parts" }, "east": { "uv": [8, 0, 16, 8], "texture": "#parts" } } },
+    { "name": "north stub", "from": [4, 0, 6], "to": [12, 4, 6], "rotation": { "origin": [8, 0, 6], "axis": "x", "angle": -22.5 }, "shade": false, "faces": {
+      "north": { "uv": [4, 12, 12, 16], "texture": "#frond" }, "south": { "uv": [4, 12, 12, 16], "texture": "#frond" } } },
+    { "name": "east stub", "from": [10, 0, 4], "to": [10, 4, 12], "rotation": { "origin": [10, 0, 8], "axis": "z", "angle": -22.5 }, "shade": false, "faces": {
+      "west": { "uv": [4, 12, 12, 16], "texture": "#frond" }, "east": { "uv": [4, 12, 12, 16], "texture": "#frond" } } }
+  ]
+}

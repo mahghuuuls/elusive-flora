@@ -1,0 +1,23 @@
+{
+  "name": "Skyclover",
+  "category": "overworld",
+  "icon": "elusiveflora:skyclover",
+  "sortnum": 14,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "skyclover",
+      "name": "Skyclover",
+      "item": "elusiveflora:skyclover",
+      "hint": "Grows on the tops of mountains and the highest hills, on grass or stone high up. It is not found lower down."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "skyclover"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "skyclover"
+    }
+  ]
+}

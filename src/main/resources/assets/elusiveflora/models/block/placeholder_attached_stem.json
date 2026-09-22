@@ -1,6 +1,0 @@
-{
-  "parent": "elusiveflora:block/wall_plant",
-  "textures": {
-    "plant": "elusiveflora:blocks/placeholder_stem"
-  }
-}

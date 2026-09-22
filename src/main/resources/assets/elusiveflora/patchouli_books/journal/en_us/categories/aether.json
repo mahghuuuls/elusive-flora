@@ -1,0 +1,7 @@
+{
+  "name": "Aether",
+  "description": "Plants of the sky islands. This page exists only when the Aether is installed.",
+  "icon": "elusiveflora:cloudfern",
+  "sortnum": 3,
+  "flag": "mod:aether_legacy"
+}

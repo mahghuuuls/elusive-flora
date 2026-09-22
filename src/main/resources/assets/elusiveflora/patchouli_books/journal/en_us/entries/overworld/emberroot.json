@@ -1,0 +1,23 @@
+{
+  "name": "Emberroot",
+  "category": "overworld",
+  "icon": "elusiveflora:emberroot",
+  "sortnum": 18,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "emberroot",
+      "name": "Emberroot",
+      "item": "elusiveflora:emberroot",
+      "hint": "Grows beside surface lava, on any solid block next to a lava pool in the open. It gives a faint light."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "emberroot"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "emberroot"
+    }
+  ]
+}

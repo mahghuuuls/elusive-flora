@@ -1,16 +1,16 @@
 {
   "variants": {
-    "facing=north,stage=stem": { "model": "elusiveflora:placeholder_attached_stem" },
-    "facing=north,stage=dormant": { "model": "elusiveflora:placeholder_attached_bloom" },
-    "facing=north,stage=bloom": { "model": "elusiveflora:placeholder_attached_bloom" },
-    "facing=east,stage=stem": { "model": "elusiveflora:placeholder_attached_stem", "y": 90 },
-    "facing=east,stage=dormant": { "model": "elusiveflora:placeholder_attached_bloom", "y": 90 },
-    "facing=east,stage=bloom": { "model": "elusiveflora:placeholder_attached_bloom", "y": 90 },
-    "facing=south,stage=stem": { "model": "elusiveflora:placeholder_attached_stem", "y": 180 },
-    "facing=south,stage=dormant": { "model": "elusiveflora:placeholder_attached_bloom", "y": 180 },
-    "facing=south,stage=bloom": { "model": "elusiveflora:placeholder_attached_bloom", "y": 180 },
-    "facing=west,stage=stem": { "model": "elusiveflora:placeholder_attached_stem", "y": 270 },
-    "facing=west,stage=dormant": { "model": "elusiveflora:placeholder_attached_bloom", "y": 270 },
-    "facing=west,stage=bloom": { "model": "elusiveflora:placeholder_attached_bloom", "y": 270 }
+    "facing=north,stage=stem": { "model": "elusiveflora:ledgebloom_stem" },
+    "facing=north,stage=dormant": { "model": "elusiveflora:ledgebloom_bloom" },
+    "facing=north,stage=bloom": { "model": "elusiveflora:ledgebloom_bloom" },
+    "facing=east,stage=stem": { "model": "elusiveflora:ledgebloom_stem", "y": 90 },
+    "facing=east,stage=dormant": { "model": "elusiveflora:ledgebloom_bloom", "y": 90 },
+    "facing=east,stage=bloom": { "model": "elusiveflora:ledgebloom_bloom", "y": 90 },
+    "facing=south,stage=stem": { "model": "elusiveflora:ledgebloom_stem", "y": 180 },
+    "facing=south,stage=dormant": { "model": "elusiveflora:ledgebloom_bloom", "y": 180 },
+    "facing=south,stage=bloom": { "model": "elusiveflora:ledgebloom_bloom", "y": 180 },
+    "facing=west,stage=stem": { "model": "elusiveflora:ledgebloom_stem", "y": 270 },
+    "facing=west,stage=dormant": { "model": "elusiveflora:ledgebloom_bloom", "y": 270 },
+    "facing=west,stage=bloom": { "model": "elusiveflora:ledgebloom_bloom", "y": 270 }
   }
 }

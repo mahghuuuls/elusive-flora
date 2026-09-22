@@ -1,0 +1,23 @@
+{
+  "name": "Sporecap",
+  "category": "overworld",
+  "icon": "elusiveflora:sporecap",
+  "sortnum": 17,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "sporecap",
+      "name": "Sporecap",
+      "item": "elusiveflora:sporecap",
+      "hint": "Grows only on mycelium, on mushroom islands. It is rare even there."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "sporecap"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "sporecap"
+    }
+  ]
+}

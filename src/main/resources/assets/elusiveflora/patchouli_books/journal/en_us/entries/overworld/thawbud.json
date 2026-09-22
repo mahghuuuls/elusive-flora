@@ -1,0 +1,24 @@
+{
+  "name": "Thawbud",
+  "category": "overworld",
+  "icon": "elusiveflora:thawbud",
+  "sortnum": 30,
+  "flag": "mod:sereneseasons",
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "thawbud",
+      "name": "Thawbud",
+      "item": "elusiveflora:thawbud",
+      "hint": "Grows on grass in plains and forests. It opens in spring only."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "thawbud"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "thawbud"
+    }
+  ]
+}

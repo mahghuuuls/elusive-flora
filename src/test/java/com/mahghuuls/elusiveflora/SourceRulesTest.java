@@ -71,6 +71,22 @@ class SourceRulesTest {
                 "the bridge itself must exist and use the API, or this scan proves nothing");
     }
 
+    /** Patchouli is a client-side book; only its public API, and only from the journal package. */
+    @Test
+    void patchouliIsUsedOnlyThroughItsApiFromTheJournalPackage() throws IOException {
+        List<String> offenders = new ArrayList<String>();
+        try (Stream<Path> files = Files.walk(MAIN)) {
+            files.filter(p -> p.toString().endsWith(".java")).forEach(p -> {
+                String text = read(p);
+                boolean inJournal = p.toString().contains(File_SEPARATOR + "client" + File_SEPARATOR + "journal" + File_SEPARATOR);
+                if (text.contains("vazkii.patchouli.") && (!inJournal || text.contains("vazkii.patchouli.common") || text.contains("vazkii.patchouli.client"))) {
+                    offenders.add(p.toString());
+                }
+            });
+        }
+        assertTrue(offenders.isEmpty(), "Patchouli used outside its API or outside client/journal: " + offenders);
+    }
+
     private static final String File_SEPARATOR = java.io.File.separator;
 
     private static String read(Path path) {

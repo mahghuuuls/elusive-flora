@@ -1,0 +1,26 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "elusiveflora:blocks/pearlfrond_frond",
+    "frond": "elusiveflora:blocks/pearlfrond_frond",
+    "parts": "elusiveflora:blocks/pearlfrond_parts"
+  },
+  "elements": [
+    { "name": "holdfast", "from": [5, 0, 5], "to": [11, 1, 11], "faces": {
+      "up": { "uv": [8, 0, 16, 8], "texture": "#parts" },
+      "north": { "uv": [8, 0, 16, 8], "texture": "#parts" }, "south": { "uv": [8, 0, 16, 8], "texture": "#parts" },
+      "west": { "uv": [8, 0, 16, 8], "texture": "#parts" }, "east": { "uv": [8, 0, 16, 8], "texture": "#parts" } } },
+    { "name": "pearl", "from": [6.5, 1, 6.5], "to": [9.5, 4, 9.5], "shade": false, "faces": {
+      "up": { "uv": [0, 0, 8, 8], "texture": "#parts" },
+      "north": { "uv": [0, 0, 8, 8], "texture": "#parts" }, "south": { "uv": [0, 0, 8, 8], "texture": "#parts" },
+      "west": { "uv": [0, 0, 8, 8], "texture": "#parts" }, "east": { "uv": [0, 0, 8, 8], "texture": "#parts" } } },
+    { "name": "north frond", "from": [4, 0, 6], "to": [12, 15, 6], "rotation": { "origin": [8, 0, 6], "axis": "x", "angle": -22.5 }, "shade": false, "faces": {
+      "north": { "uv": [4, 0, 12, 15], "texture": "#frond" }, "south": { "uv": [4, 0, 12, 15], "texture": "#frond" } } },
+    { "name": "south frond", "from": [4, 0, 10], "to": [12, 15, 10], "rotation": { "origin": [8, 0, 10], "axis": "x", "angle": 22.5 }, "shade": false, "faces": {
+      "north": { "uv": [4, 0, 12, 15], "texture": "#frond" }, "south": { "uv": [4, 0, 12, 15], "texture": "#frond" } } },
+    { "name": "west frond", "from": [6, 0, 4], "to": [6, 15, 12], "rotation": { "origin": [6, 0, 8], "axis": "z", "angle": 22.5 }, "shade": false, "faces": {
+      "west": { "uv": [4, 0, 12, 15], "texture": "#frond" }, "east": { "uv": [4, 0, 12, 15], "texture": "#frond" } } },
+    { "name": "east frond", "from": [10, 0, 4], "to": [10, 15, 12], "rotation": { "origin": [10, 0, 8], "axis": "z", "angle": -22.5 }, "shade": false, "faces": {
+      "west": { "uv": [4, 0, 12, 15], "texture": "#frond" }, "east": { "uv": [4, 0, 12, 15], "texture": "#frond" } } }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "elusiveflora:blocks/ledgebloom_parts",
+    "parts": "elusiveflora:blocks/ledgebloom_parts"
+  },
+  "elements": [
+    { "name": "cut stalk", "from": [7, 7, 12], "to": [9, 9, 16], "faces": {
+      "down": { "uv": [0, 0, 8, 8], "texture": "#parts" }, "up": { "uv": [0, 0, 8, 8], "texture": "#parts" },
+      "north": { "uv": [0, 12, 4, 16], "texture": "#parts" }, "west": { "uv": [0, 0, 8, 8], "texture": "#parts" },
+      "east": { "uv": [0, 0, 8, 8], "texture": "#parts" } } }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "processor": "com.mahghuuls.elusiveflora.client.journal.PlantEntryProcessor",
+  "components": [
+    { "type": "header", "text": "#name", "x": -1, "y": 0 },
+    { "type": "item", "item": "#item", "x": 50, "y": 14, "framed": true },
+    { "type": "text", "text": "#hint", "x": 0, "y": 40 }
+  ]
+}

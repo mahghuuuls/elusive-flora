@@ -1,0 +1,24 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "elusiveflora:blocks/ledgebloom_petals",
+    "petals": "elusiveflora:blocks/ledgebloom_petals",
+    "parts": "elusiveflora:blocks/ledgebloom_parts"
+  },
+  "elements": [
+    { "name": "stalk out of the wall", "from": [7, 7, 10], "to": [9, 9, 16], "faces": {
+      "down": { "uv": [0, 0, 8, 8], "texture": "#parts" }, "up": { "uv": [0, 0, 8, 8], "texture": "#parts" },
+      "north": { "uv": [0, 0, 8, 8], "texture": "#parts" }, "west": { "uv": [0, 0, 8, 8], "texture": "#parts" },
+      "east": { "uv": [0, 0, 8, 8], "texture": "#parts" } } },
+    { "name": "rosette", "from": [2, 2, 9.5], "to": [14, 14, 9.5], "shade": false, "faces": {
+      "north": { "uv": [0, 0, 16, 16], "texture": "#petals" }, "south": { "uv": [0, 0, 16, 16], "texture": "#petals" } } },
+    { "name": "bud", "from": [6, 6, 7.5], "to": [10, 10, 9.5], "shade": false, "faces": {
+      "down": { "uv": [8, 0, 16, 8], "texture": "#parts" }, "up": { "uv": [8, 0, 16, 8], "texture": "#parts" },
+      "north": { "uv": [8, 0, 16, 8], "texture": "#parts" }, "west": { "uv": [8, 0, 16, 8], "texture": "#parts" },
+      "east": { "uv": [8, 0, 16, 8], "texture": "#parts" } } },
+    { "name": "left leaf", "from": [1.5, 0, 12], "to": [7.5, 7, 12], "rotation": { "origin": [4.5, 7, 12], "axis": "x", "angle": 22.5 }, "shade": false, "faces": {
+      "north": { "uv": [8, 8, 16, 16], "texture": "#parts" }, "south": { "uv": [8, 8, 16, 16], "texture": "#parts" } } },
+    { "name": "right leaf", "from": [8.5, 0, 12], "to": [14.5, 7, 12], "rotation": { "origin": [11.5, 7, 12], "axis": "x", "angle": 22.5 }, "shade": false, "faces": {
+      "north": { "uv": [8, 8, 16, 16], "texture": "#parts" }, "south": { "uv": [8, 8, 16, 16], "texture": "#parts" } } }
+  ]
+}

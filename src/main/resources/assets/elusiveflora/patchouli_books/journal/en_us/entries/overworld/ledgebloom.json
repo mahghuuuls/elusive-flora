@@ -1,0 +1,23 @@
+{
+  "name": "Ledgebloom",
+  "category": "overworld",
+  "icon": "elusiveflora:ledgebloom",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "ledgebloom",
+      "name": "Ledgebloom",
+      "item": "elusiveflora:ledgebloom",
+      "hint": "Grows sideways out of stone cliff faces in mountains and high hills, above the ground. It never grows on top of a block."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "ledgebloom"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "ledgebloom"
+    }
+  ]
+}

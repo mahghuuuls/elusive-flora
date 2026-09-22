@@ -1,0 +1,23 @@
+{
+  "name": "Voidbloom",
+  "category": "end",
+  "icon": "elusiveflora:voidbloom",
+  "sortnum": 60,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "voidbloom",
+      "name": "Voidbloom",
+      "item": "elusiveflora:voidbloom",
+      "hint": "Grows on any solid block in the End. It gives light."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "voidbloom"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "voidbloom"
+    }
+  ]
+}

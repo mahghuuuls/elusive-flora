@@ -1,0 +1,23 @@
+{
+  "name": "Rainthistle",
+  "category": "overworld",
+  "icon": "elusiveflora:rainthistle",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "rainthistle",
+      "name": "Rainthistle",
+      "item": "elusiveflora:rainthistle",
+      "hint": "Grows on grass and dirt in swamps and other wet biomes. It opens only while it rains."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "rainthistle"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "rainthistle"
+    }
+  ]
+}

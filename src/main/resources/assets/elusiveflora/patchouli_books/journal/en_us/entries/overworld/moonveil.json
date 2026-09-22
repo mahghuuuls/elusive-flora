@@ -1,0 +1,23 @@
+{
+  "name": "Moonveil",
+  "category": "overworld",
+  "icon": "elusiveflora:moonveil",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "moonveil",
+      "name": "Moonveil",
+      "item": "elusiveflora:moonveil",
+      "hint": "Grows on grass and dirt in magical biomes. It opens only on the night of a full moon and gives light then."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "moonveil"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "moonveil"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Ashen Lotus",
+  "category": "nether",
+  "icon": "elusiveflora:ashenlotus",
+  "sortnum": 51,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "ashenlotus",
+      "name": "Ashen Lotus",
+      "item": "elusiveflora:ashenlotus",
+      "hint": "Grows on netherrack beside lava in the Nether. Look along the shores of lava lakes."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "ashenlotus"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "ashenlotus"
+    }
+  ]
+}

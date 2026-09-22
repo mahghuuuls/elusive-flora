@@ -1,0 +1,23 @@
+{
+  "name": "Duskwisp",
+  "category": "overworld",
+  "icon": "elusiveflora:duskwisp",
+  "sortnum": 19,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "duskwisp",
+      "name": "Duskwisp",
+      "item": "elusiveflora:duskwisp",
+      "hint": "Grows on grass and dirt in forests. By day it is a closed bud. At night it opens and gives light."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "duskwisp"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "duskwisp"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Sunspire",
+  "category": "overworld",
+  "icon": "elusiveflora:sunspire",
+  "sortnum": 31,
+  "flag": "mod:sereneseasons",
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "sunspire",
+      "name": "Sunspire",
+      "item": "elusiveflora:sunspire",
+      "hint": "Grows on grass and sand in plains, savanna, and other hot biomes. It opens in summer only."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "sunspire"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "sunspire"
+    }
+  ]
+}

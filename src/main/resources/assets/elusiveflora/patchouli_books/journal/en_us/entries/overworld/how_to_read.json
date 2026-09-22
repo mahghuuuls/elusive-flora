@@ -1,0 +1,12 @@
+{
+  "name": "How to read these notes",
+  "category": "overworld",
+  "icon": "minecraft:book",
+  "priority": true,
+  "sortnum": -1,
+  "pages": [
+    { "type": "text", "text": "Every plant has three pages. They show the plant, say what kind of place it grows in, say when it is open, and list the biomes where it can be found in this game. The biome list changes with the mods and the settings you play with. A plant that is closed looks like a bud. A closed plant still counts as found: come back when it opens." },
+    { "type": "text", "text": "Picking. Hit a plant once and it drops one of itself. What stays behind is a stem. A stem gives nothing. Break the stem and the plant is gone for good. Leave it and the plant grows back from it, usually after a few days. A plant cannot be picked up as a block, cannot be planted, and does not grow from bone meal." },
+    { "type": "text", "flag": "mod:sereneseasons", "text": "Seasons. Four plants follow the seasons of Serene Seasons: one opens in spring, one in summer, one in autumn, one in winter. In a world where seasons are turned off for the dimension, they stay open all year." }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Canopy Tear",
+  "category": "overworld",
+  "icon": "elusiveflora:canopytear",
+  "sortnum": 15,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "canopytear",
+      "name": "Canopy Tear",
+      "item": "elusiveflora:canopytear",
+      "hint": "Grows on the side of jungle tree trunks, under the canopy. It never grows on leaves."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "canopytear"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "canopytear"
+    }
+  ]
+}

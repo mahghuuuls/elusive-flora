@@ -1,0 +1,24 @@
+{
+  "name": "Amberleaf",
+  "category": "overworld",
+  "icon": "elusiveflora:amberleaf",
+  "sortnum": 32,
+  "flag": "mod:sereneseasons",
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "amberleaf",
+      "name": "Amberleaf",
+      "item": "elusiveflora:amberleaf",
+      "hint": "Grows on grass and dirt in forests and pine woods. It opens in autumn only."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "amberleaf"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "amberleaf"
+    }
+  ]
+}

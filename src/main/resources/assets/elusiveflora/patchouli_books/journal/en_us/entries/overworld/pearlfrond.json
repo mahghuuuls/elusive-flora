@@ -1,0 +1,23 @@
+{
+  "name": "Pearlfrond",
+  "category": "overworld",
+  "icon": "elusiveflora:pearlfrond",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "pearlfrond",
+      "name": "Pearlfrond",
+      "item": "elusiveflora:pearlfrond",
+      "hint": "Grows on the floor of deep sea water, at least eight blocks down. It gives light, so look for a glow on the sea bed at night."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "pearlfrond"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "pearlfrond"
+    }
+  ]
+}

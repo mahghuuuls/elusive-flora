@@ -1,0 +1,23 @@
+{
+  "name": "Streamreed",
+  "category": "overworld",
+  "icon": "elusiveflora:streamreed",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "streamreed",
+      "name": "Streamreed",
+      "item": "elusiveflora:streamreed",
+      "hint": "Grows in the mud of river beds, under two to four blocks of water."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "streamreed"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "streamreed"
+    }
+  ]
+}

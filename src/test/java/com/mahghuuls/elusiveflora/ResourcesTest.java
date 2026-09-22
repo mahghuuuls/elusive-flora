@@ -139,6 +139,10 @@ class ResourcesTest {
                             }
                         }
                     }
+                    // A "_parts" sheet wraps the solid pieces of a showcase model and is opaque throughout.
+                    if (png.getFileName().toString().endsWith("_parts.png")) {
+                        continue;
+                    }
                     assertTrue(clear > 0, png + " has no clear background");
                     assertEquals(0, image.getRGB(0, 0) >>> 24, png + " top left corner must be clear");
                 }
@@ -162,14 +166,22 @@ class ResourcesTest {
                 variants++;
                 String stage = model.group(1);
                 String name = model.group(2);
-                if (name.startsWith("placeholder_")) {
-                    continue;
-                }
                 boolean closedLook = stage.equals("dormant") && plant.condition() != Condition.ALWAYS;
                 String expected = id + "_" + (stage.equals("stem") ? "stem" : closedLook ? "dormant" : "bloom");
                 assertEquals(expected, name, id + " stage=" + stage);
                 String blockModel = read(ASSETS.resolve("models").resolve("block").resolve(name + ".json"));
-                assertTrue(blockModel.contains("\"elusiveflora:blocks/" + name + "\""), name + " model texture");
+                // A flat plant has one texture named like its model; a showcase model has several
+                // textures of its own, all named after the plant.
+                Matcher texture = Pattern.compile("\"elusiveflora:blocks/([a-z0-9_]+)\"").matcher(blockModel);
+                int own = 0;
+                while (texture.find()) {
+                    assertTrue(texture.group(1).startsWith(id + "_"), name + " uses another plant's texture " + texture.group(1));
+                    own++;
+                }
+                assertTrue(own >= 1, name + " names no texture");
+                if (!plant.isShowcase()) {
+                    assertTrue(blockModel.contains("\"elusiveflora:blocks/" + name + "\""), name + " model texture");
+                }
             }
             assertTrue(variants >= 3, id + " blockstate variants read: " + variants);
         }

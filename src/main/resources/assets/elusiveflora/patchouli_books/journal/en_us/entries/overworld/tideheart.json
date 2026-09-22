@@ -1,0 +1,23 @@
+{
+  "name": "Tideheart",
+  "category": "overworld",
+  "icon": "elusiveflora:tideheart",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "tideheart",
+      "name": "Tideheart",
+      "item": "elusiveflora:tideheart",
+      "hint": "Grows on the sea bed near the shore, under two to four blocks of water, in beach and ocean biomes."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "tideheart"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "tideheart"
+    }
+  ]
+}

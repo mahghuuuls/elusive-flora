@@ -1,0 +1,23 @@
+{
+  "name": "Starpetal",
+  "category": "end",
+  "icon": "elusiveflora:starpetal",
+  "sortnum": 61,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "starpetal",
+      "name": "Starpetal",
+      "item": "elusiveflora:starpetal",
+      "hint": "Grows only in the End biomes that other mods add. Without those mods it does not grow anywhere."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "starpetal"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "starpetal"
+    }
+  ]
+}
