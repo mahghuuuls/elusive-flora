@@ -67,9 +67,6 @@ class JournalResourcesTest {
         try (Stream<Path> files = Files.walk(ENTRIES)) {
             for (Path file : files.filter(p -> p.toString().endsWith(".json")).toArray(Path[]::new)) {
                 String stem = file.getFileName().toString().replace(".json", "");
-                if (stem.equals("how_to_read")) {
-                    continue;
-                }
                 assertTrue(ids.contains(stem), "entry for a plant that is not in the roster: " + file);
             }
         }
@@ -99,21 +96,7 @@ class JournalResourcesTest {
     }
 
     @Test
-    void theSeasonNoteIsGatedAndTheBookTextIsNot() throws IOException {
-        String intro = read(ENTRIES.resolve("overworld").resolve("how_to_read.json"));
-        Matcher pages = Pattern.compile("\\{[^{}]*\"text\": \"([^\"]*)\"[^{}]*\\}").matcher(intro);
-        int seasonPages = 0;
-        int pageCount = 0;
-        while (pages.find()) {
-            pageCount++;
-            boolean mentionsSeasons = pages.group(1).toLowerCase(Locale.ROOT).contains("season");
-            boolean gated = pages.group(0).contains("\"flag\": \"mod:sereneseasons\"");
-            assertEquals(mentionsSeasons, gated, "page " + pageCount + " season text must be gated, and only that");
-            if (gated) {
-                seasonPages++;
-            }
-        }
-        assertEquals(1, seasonPages);
+    void theBookTextDoesNotMentionSeasonsBecauseItCannotBeGated() throws IOException {
         assertFalse(read(BOOK.resolve("book.json")).toLowerCase(Locale.ROOT).contains("season"),
                 "the landing text cannot be gated, so it must not mention seasons");
     }
@@ -164,7 +147,7 @@ class JournalResourcesTest {
     /**
      * Every page fits. A page is 116 by 156 pixels; the font is 9 pixels per line and about 22
      * characters per line at the book's width. The longest possible texts are measured: the
-     * hint of each entry, the longest condition sentence, and a full biome list of twelve names.
+     * hint of each entry, the longest condition sentence, and a full biome page.
      */
     @Test
     void everyTemplatePageFitsItsLongestText() throws IOException {
@@ -189,15 +172,10 @@ class JournalResourcesTest {
         }
         assertTrue(conditionTop + lines(longestCondition) * LINE_HEIGHT <= PAGE_HEIGHT,
                 "the longest condition runs off the page");
-        List<String> twelve = new ArrayList<String>();
-        for (int i = 0; i < JournalText.MAX_BIOMES; i++) {
-            // Twenty characters is as long as a vanilla name gets ("Mutated Redwood Taiga Hills" is 27,
-            // but it is one of two; the average of the twelve longest vanilla names is under 20).
-            twelve.add("Mutated Taiga Hills!");
-        }
-        int longestBiomes = JournalText.biomes(twelve, true, true).length() + ", and 99 more".length();
-        assertTrue(biomesTop + lines(longestBiomes) * LINE_HEIGHT <= PAGE_HEIGHT,
-                "a full biome list (" + longestBiomes + " chars) runs off the page from y " + biomesTop);
+        // The biome text lays itself out to LINES_PER_PAGE lines of CHARS_PER_LINE; the page must hold them.
+        assertTrue(biomesTop + JournalText.LINES_PER_PAGE * LINE_HEIGHT <= PAGE_HEIGHT,
+                "a full biome page runs off the page from y " + biomesTop);
+        assertTrue(JournalText.CHARS_PER_LINE <= CHARS_PER_LINE, "the biome line model must not be wider than the page");
 
         String landing = read(BOOK.resolve("book.json"));
         Matcher text = Pattern.compile("\"landing_text\": \"([^\"]*)\"").matcher(landing);

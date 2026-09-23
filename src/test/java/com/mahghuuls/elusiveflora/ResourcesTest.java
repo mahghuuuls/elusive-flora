@@ -139,7 +139,7 @@ class ResourcesTest {
                             }
                         }
                     }
-                    // A "_parts" sheet wraps the solid pieces of a showcase model and is opaque throughout.
+                    // A "_parts" sheet wraps the solid pieces of a showcase model; it may be opaque throughout.
                     if (png.getFileName().toString().endsWith("_parts.png")) {
                         continue;
                     }

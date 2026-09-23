@@ -2,8 +2,8 @@ package com.mahghuuls.elusiveflora.client.journal;
 
 import com.mahghuuls.elusiveflora.roster.Condition;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * The sentences a journal page builds from plant data: the condition in plain words and the list
@@ -12,8 +12,14 @@ import java.util.List;
  */
 public final class JournalText {
 
-    /** Biome names shown before the list is cut short with a count. */
-    public static final int MAX_BIOMES = 12;
+    /** Text lines a "Where it grows" page holds under its header (156 px page, 22 px header, 9 px lines). */
+    public static final int LINES_PER_PAGE = 14;
+
+    /** Characters that fit on one 116 px journal line when every glyph is 6 px wide, with a margin. */
+    public static final int CHARS_PER_LINE = 19;
+
+    /** The Patchouli line break macro. */
+    public static final String BREAK = "$(br)";
 
     private JournalText() {
     }
@@ -55,15 +61,17 @@ public final class JournalText {
             case WINTER:
                 return "Open in winter. Closed for the rest of the year.";
             default:
-                return "Open all year, day and night.";
+                return "Open all year.";
         }
     }
 
     /**
-     * The biome sentence for a list of installed biome names that already match the plant's
-     * effective rules, sorted by the caller. Says so plainly when nothing installed matches, and
-     * why, when the rule names only biomes from a mod that is absent ({@code anyInstalled} false).
-     * A rule that is not resolved yet (before the game finished loading) gets a holding sentence.
+     * The biome text for a list of installed biome names that already match the plant's
+     * effective rules, sorted by the caller. One name per line while they all fit on the page;
+     * otherwise a packed comma list that stops before the page ends and says how many are left.
+     * Says so plainly when nothing installed matches, and why, when the rule names only biomes
+     * from a mod that is absent ({@code anyInstalled} false). A rule that is not resolved yet
+     * (before the game finished loading) gets a holding sentence.
      */
     public static String biomes(List<String> names, boolean resolved, boolean anyInstalled) {
         if (!resolved) {
@@ -74,18 +82,51 @@ public final class JournalText {
                     ? "No installed biome grows it."
                     : "No installed biome grows it. The biomes it needs come from a mod that is not installed.";
         }
-        List<String> shown = new ArrayList<String>(names.subList(0, Math.min(MAX_BIOMES, names.size())));
-        StringBuilder text = new StringBuilder("Found in: ");
-        for (int i = 0; i < shown.size(); i++) {
-            if (i > 0) {
-                text.append(", ");
+        int linesOnePerName = 0;
+        for (String name : names) {
+            linesOnePerName += lineCount(name);
+        }
+        if (linesOnePerName <= LINES_PER_PAGE) {
+            return String.join(BREAK, names);
+        }
+        // Packed: keep adding names while the text plus the closing count still fits the page.
+        String text = "Found in: " + names.get(0);
+        int shown = 1;
+        while (shown < names.size()) {
+            String longer = text + ", " + names.get(shown);
+            String closing = shown + 1 < names.size() ? ", and " + (names.size() - shown - 1) + " more." : ".";
+            if (lineCount(longer + closing) > LINES_PER_PAGE) {
+                break;
             }
-            text.append(shown.get(i));
+            text = longer;
+            shown++;
         }
-        int more = names.size() - shown.size();
-        if (more > 0) {
-            text.append(", and ").append(more).append(" more");
+        int more = names.size() - shown;
+        return more > 0 ? text + ", and " + more + " more." : text + ".";
+    }
+
+    /**
+     * Lines the journal needs for a text, in the font model of this class: words wrap at spaces,
+     * a word longer than a line is cut. Explicit breaks count as new lines.
+     */
+    public static int lineCount(String text) {
+        int lines = 0;
+        for (String paragraph : text.split(Pattern.quote(BREAK), -1)) {
+            lines++;
+            int used = 0;
+            for (String word : paragraph.split(" ")) {
+                int width = word.length();
+                if (used > 0 && used + 1 + width > CHARS_PER_LINE) {
+                    lines++;
+                    used = 0;
+                }
+                while (width > CHARS_PER_LINE) {
+                    lines++;
+                    width -= CHARS_PER_LINE;
+                }
+                used += (used > 0 ? 1 : 0) + width;
+            }
         }
-        return text.append('.').toString();
+        return lines;
     }
 }
