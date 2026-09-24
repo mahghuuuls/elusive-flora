@@ -24,7 +24,10 @@ class PlantRosterTest {
             "ledgebloom", "pearlfrond", "streamreed", "tideheart", "skyclover", "canopytear",
             "frostbell", "sporecap", "emberroot", "duskwisp", "rainthistle", "thawbud", "sunspire",
             "amberleaf", "winterthorn", "moonveil", "umbrabud", "soulwick", "ashenlotus", "voidbloom",
-            "starpetal", "cloudfern");
+            "starpetal", "cloudfern",
+            // Added 2026-09-24 by the roster expansion.
+            "sunscale", "gravebell", "mournlily", "sporelantern", "shadelace", "prismthorn", "deepglow",
+            "blazecap", "wartvine", "marrowbloom");
 
     private static final String HEADER = "id,display_name,status,dimension,situation_rule,biome_types,"
             + "biome_names,ground,condition,rarity,chunk_chance_percent,regrow_game_days,yield_per_pick,"
@@ -34,9 +37,9 @@ class PlantRosterTest {
             "frostbell,Frostbell,approved,overworld,snow (8),SNOWY,,on:snow|grass|dirt,always,uncommon,10,2,1,flat,0,no\n";
 
     @Test
-    void shippedRosterHasTheTwentyTwoApprovedPlantsInOrder() {
+    void shippedRosterHasTheThirtyTwoApprovedPlantsInOrder() {
         PlantRoster roster = PlantRoster.load();
-        assertEquals(22, roster.size());
+        assertEquals(32, roster.size());
         for (int i = 0; i < EXPECTED_IDS.size(); i++) {
             assertEquals(EXPECTED_IDS.get(i), roster.plants().get(i).id(), "row " + i);
         }
@@ -83,6 +86,32 @@ class PlantRosterTest {
         PlantDefinition starpetal = roster.byId("starpetal");
         assertEquals(4, starpetal.biomeRule().biomeNames().size());
         assertTrue(starpetal.biomeRule().typeNames().isEmpty());
+    }
+
+    /** The rows added on 2026-09-24: sand for the dune plant, water beside the swamp plant, named biomes for the End and Nether plants. */
+    @Test
+    void expansionRowsParseAsIntended() {
+        PlantRoster roster = PlantRoster.load();
+        PlantDefinition sunscale = roster.byId("sunscale");
+        assertEquals(Arrays.asList("sand", "minecraft:hardened_clay", "minecraft:stained_hardened_clay"), sunscale.groundRule().groundKeywords());
+        assertTrue(sunscale.biomeRule().typeNames().contains("MESA"));
+
+        PlantDefinition mournlily = roster.byId("mournlily");
+        assertTrue(mournlily.groundRule().nearWater());
+        assertFalse(mournlily.groundRule().nearLava());
+
+        assertTrue(roster.byId("moonveil").biomeRule().typeNames().containsAll(Arrays.asList("MAGICAL", "LUSH", "FOREST")));
+        assertTrue(roster.byId("umbrabud").biomeRule().typeNames().contains("SWAMP"));
+
+        for (String id : new String[] {"sporelantern", "shadelace", "prismthorn", "deepglow", "blazecap", "wartvine", "marrowbloom"}) {
+            PlantDefinition plant = roster.byId(id);
+            assertTrue(plant.biomeRule().typeNames().isEmpty(), id + " has no biome type");
+            assertTrue(plant.biomeRule().biomeNames().size() >= 3, id + " names at least three biomes");
+            assertEquals(Arrays.asList("any_solid"), plant.groundRule().groundKeywords(), id);
+            assertFalse(plant.hasDormantStage(), id);
+        }
+        assertEquals(DimensionKind.END, roster.byId("deepglow").dimension());
+        assertEquals(DimensionKind.NETHER, roster.byId("marrowbloom").dimension());
     }
 
     @Test

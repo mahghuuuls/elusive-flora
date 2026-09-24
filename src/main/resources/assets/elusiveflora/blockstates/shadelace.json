@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:shadelace_stem" },
+    "stage=dormant": { "model": "elusiveflora:shadelace_bloom" },
+    "stage=bloom": { "model": "elusiveflora:shadelace_bloom" }
+  }
+}

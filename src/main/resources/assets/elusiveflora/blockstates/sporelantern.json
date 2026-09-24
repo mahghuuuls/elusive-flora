@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:sporelantern_stem" },
+    "stage=dormant": { "model": "elusiveflora:sporelantern_bloom" },
+    "stage=bloom": { "model": "elusiveflora:sporelantern_bloom" }
+  }
+}

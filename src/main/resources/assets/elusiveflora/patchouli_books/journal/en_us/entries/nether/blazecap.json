@@ -1,0 +1,23 @@
+{
+  "name": "Blazecap",
+  "category": "nether",
+  "icon": "elusiveflora:blazecap",
+  "sortnum": 52,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "blazecap",
+      "name": "Blazecap",
+      "item": "elusiveflora:blazecap",
+      "hint": "Grows on the ground in the fungus and mushroom Nether biomes that other mods add."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "blazecap"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "blazecap"
+    }
+  ]
+}

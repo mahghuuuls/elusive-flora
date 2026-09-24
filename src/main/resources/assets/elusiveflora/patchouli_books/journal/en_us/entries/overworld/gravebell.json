@@ -1,0 +1,23 @@
+{
+  "name": "Gravebell",
+  "category": "overworld",
+  "icon": "elusiveflora:gravebell",
+  "sortnum": 22,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "gravebell",
+      "name": "Gravebell",
+      "item": "elusiveflora:gravebell",
+      "hint": "Grows on the ground in dark, spooky woods."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "gravebell"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "gravebell"
+    }
+  ]
+}

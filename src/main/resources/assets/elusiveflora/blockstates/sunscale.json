@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:sunscale_stem" },
+    "stage=dormant": { "model": "elusiveflora:sunscale_bloom" },
+    "stage=bloom": { "model": "elusiveflora:sunscale_bloom" }
+  }
+}

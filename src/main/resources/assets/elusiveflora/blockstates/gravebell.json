@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:gravebell_stem" },
+    "stage=dormant": { "model": "elusiveflora:gravebell_bloom" },
+    "stage=bloom": { "model": "elusiveflora:gravebell_bloom" }
+  }
+}

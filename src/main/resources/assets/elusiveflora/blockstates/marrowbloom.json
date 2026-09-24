@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:marrowbloom_stem" },
+    "stage=dormant": { "model": "elusiveflora:marrowbloom_bloom" },
+    "stage=bloom": { "model": "elusiveflora:marrowbloom_bloom" }
+  }
+}

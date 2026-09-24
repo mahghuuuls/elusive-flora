@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:wartvine_stem" },
+    "stage=dormant": { "model": "elusiveflora:wartvine_bloom" },
+    "stage=bloom": { "model": "elusiveflora:wartvine_bloom" }
+  }
+}

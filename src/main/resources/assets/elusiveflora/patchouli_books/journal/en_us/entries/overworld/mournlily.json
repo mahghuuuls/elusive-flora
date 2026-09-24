@@ -1,0 +1,23 @@
+{
+  "name": "Mournlily",
+  "category": "overworld",
+  "icon": "elusiveflora:mournlily",
+  "sortnum": 23,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "mournlily",
+      "name": "Mournlily",
+      "item": "elusiveflora:mournlily",
+      "hint": "Grows on grass or dirt at the edge of swamp water."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "mournlily"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "mournlily"
+    }
+  ]
+}

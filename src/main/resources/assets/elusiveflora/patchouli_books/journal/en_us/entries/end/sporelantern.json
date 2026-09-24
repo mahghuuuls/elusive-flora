@@ -1,0 +1,23 @@
+{
+  "name": "Sporelantern",
+  "category": "end",
+  "icon": "elusiveflora:sporelantern",
+  "sortnum": 62,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "sporelantern",
+      "name": "Sporelantern",
+      "item": "elusiveflora:sporelantern",
+      "hint": "Grows on the ground in the fungus biomes of the End that other mods add."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "sporelantern"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "sporelantern"
+    }
+  ]
+}

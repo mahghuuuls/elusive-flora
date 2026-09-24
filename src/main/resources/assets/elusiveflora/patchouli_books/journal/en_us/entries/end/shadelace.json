@@ -1,0 +1,23 @@
+{
+  "name": "Shadelace",
+  "category": "end",
+  "icon": "elusiveflora:shadelace",
+  "sortnum": 63,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "shadelace",
+      "name": "Shadelace",
+      "item": "elusiveflora:shadelace",
+      "hint": "Grows on the ground in the dark End biomes that other mods add."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "shadelace"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "shadelace"
+    }
+  ]
+}

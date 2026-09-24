@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:prismthorn_stem" },
+    "stage=dormant": { "model": "elusiveflora:prismthorn_bloom" },
+    "stage=bloom": { "model": "elusiveflora:prismthorn_bloom" }
+  }
+}

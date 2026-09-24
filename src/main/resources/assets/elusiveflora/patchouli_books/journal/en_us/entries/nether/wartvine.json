@@ -1,0 +1,23 @@
+{
+  "name": "Wartvine",
+  "category": "nether",
+  "icon": "elusiveflora:wartvine",
+  "sortnum": 53,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "wartvine",
+      "name": "Wartvine",
+      "item": "elusiveflora:wartvine",
+      "hint": "Grows on the ground in the grassy Nether biomes that other mods add."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "wartvine"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "wartvine"
+    }
+  ]
+}

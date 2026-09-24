@@ -1,0 +1,23 @@
+{
+  "name": "Sunscale",
+  "category": "overworld",
+  "icon": "elusiveflora:sunscale",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "sunscale",
+      "name": "Sunscale",
+      "item": "elusiveflora:sunscale",
+      "hint": "Grows on sand and on the clay of mesas, in deserts and mesas."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "sunscale"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "sunscale"
+    }
+  ]
+}

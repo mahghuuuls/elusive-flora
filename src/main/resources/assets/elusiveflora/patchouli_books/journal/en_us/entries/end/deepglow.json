@@ -1,0 +1,23 @@
+{
+  "name": "Deepglow",
+  "category": "end",
+  "icon": "elusiveflora:deepglow",
+  "sortnum": 65,
+  "pages": [
+    {
+      "type": "elusiveflora:plant_entry",
+      "plant": "deepglow",
+      "name": "Deepglow",
+      "item": "elusiveflora:deepglow",
+      "hint": "Grows on the ground by the lakes and springs of the End that other mods add."
+    },
+    {
+      "type": "elusiveflora:plant_when",
+      "plant": "deepglow"
+    },
+    {
+      "type": "elusiveflora:plant_where",
+      "plant": "deepglow"
+    }
+  ]
+}

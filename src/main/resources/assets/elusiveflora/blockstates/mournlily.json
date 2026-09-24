@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "stage=stem": { "model": "elusiveflora:mournlily_stem" },
+    "stage=dormant": { "model": "elusiveflora:mournlily_bloom" },
+    "stage=bloom": { "model": "elusiveflora:mournlily_bloom" }
+  }
+}
