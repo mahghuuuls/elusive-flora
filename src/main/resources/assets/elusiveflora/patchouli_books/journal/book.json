@@ -2,7 +2,7 @@
   "name": "Wanderer's Herbarium",
   "landing_text": "Notes on rare plants and fungi. Each grows only in its own kind of place, and some open only at certain times. A picked plant leaves a stem that grows back in time. Break the stem and it is gone for good. Plants cannot be moved or farmed. These notes say what kind of place to look in.",
   "subtitle": "Rare plants and fungi",
-  "version": "1",
+  "version": "0",
   "creative_tab": "elusiveflora",
   "model": "elusiveflora:journal",
   "show_progress": false,
