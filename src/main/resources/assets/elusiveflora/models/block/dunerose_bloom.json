@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "elusiveflora:blocks/sunscale_bloom"
+    "cross": "elusiveflora:blocks/dunerose_bloom"
   }
 }

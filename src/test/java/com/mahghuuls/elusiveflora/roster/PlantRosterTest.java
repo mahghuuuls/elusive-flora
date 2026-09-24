@@ -26,7 +26,7 @@ class PlantRosterTest {
             "amberleaf", "winterthorn", "moonveil", "umbrabud", "soulwick", "ashenlotus", "voidbloom",
             "starpetal", "cloudfern",
             // Added 2026-09-24 by the roster expansion.
-            "sunscale", "gravebell", "mournlily", "sporelantern", "shadelace", "prismthorn", "deepglow",
+            "dunerose", "gravebell", "mournlily", "sporelantern", "shadelace", "prismthorn", "deepglow",
             "blazecap", "wartvine", "marrowbloom");
 
     private static final String HEADER = "id,display_name,status,dimension,situation_rule,biome_types,"
@@ -92,9 +92,9 @@ class PlantRosterTest {
     @Test
     void expansionRowsParseAsIntended() {
         PlantRoster roster = PlantRoster.load();
-        PlantDefinition sunscale = roster.byId("sunscale");
-        assertEquals(Arrays.asList("sand", "minecraft:hardened_clay", "minecraft:stained_hardened_clay"), sunscale.groundRule().groundKeywords());
-        assertTrue(sunscale.biomeRule().typeNames().contains("MESA"));
+        PlantDefinition dunerose = roster.byId("dunerose");
+        assertEquals(Arrays.asList("sand", "minecraft:hardened_clay", "minecraft:stained_hardened_clay"), dunerose.groundRule().groundKeywords());
+        assertTrue(dunerose.biomeRule().typeNames().contains("MESA"));
 
         PlantDefinition mournlily = roster.byId("mournlily");
         assertTrue(mournlily.groundRule().nearWater());

@@ -1,23 +1,23 @@
 {
-  "name": "Sunscale",
+  "name": "Dunerose",
   "category": "overworld",
-  "icon": "elusiveflora:sunscale",
+  "icon": "elusiveflora:dunerose",
   "sortnum": 21,
   "pages": [
     {
       "type": "elusiveflora:plant_entry",
-      "plant": "sunscale",
-      "name": "Sunscale",
-      "item": "elusiveflora:sunscale",
+      "plant": "dunerose",
+      "name": "Dunerose",
+      "item": "elusiveflora:dunerose",
       "hint": "Grows on sand and on the clay of mesas, in deserts and mesas."
     },
     {
       "type": "elusiveflora:plant_when",
-      "plant": "sunscale"
+      "plant": "dunerose"
     },
     {
       "type": "elusiveflora:plant_where",
-      "plant": "sunscale"
+      "plant": "dunerose"
     }
   ]
 }

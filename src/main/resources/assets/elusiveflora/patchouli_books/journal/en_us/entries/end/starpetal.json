@@ -9,7 +9,7 @@
       "plant": "starpetal",
       "name": "Starpetal",
       "item": "elusiveflora:starpetal",
-      "hint": "Grows only in the End biomes that other mods add. Without those mods it does not grow anywhere."
+      "hint": "Grows on the ground in a few rare End biomes."
     },
     {
       "type": "elusiveflora:plant_when",

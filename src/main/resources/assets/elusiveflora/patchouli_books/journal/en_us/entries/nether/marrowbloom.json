@@ -9,7 +9,7 @@
       "plant": "marrowbloom",
       "name": "Marrowbloom",
       "item": "elusiveflora:marrowbloom",
-      "hint": "Grows on the ground in the bone and soul sand Nether biomes that other mods add."
+      "hint": "Grows on the ground in the bone and soul sand Nether biomes."
     },
     {
       "type": "elusiveflora:plant_when",

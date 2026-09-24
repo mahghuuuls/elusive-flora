@@ -9,7 +9,7 @@
       "plant": "wartvine",
       "name": "Wartvine",
       "item": "elusiveflora:wartvine",
-      "hint": "Grows on the ground in the grassy Nether biomes that other mods add."
+      "hint": "Grows on the ground in the grassy Nether biomes."
     },
     {
       "type": "elusiveflora:plant_when",

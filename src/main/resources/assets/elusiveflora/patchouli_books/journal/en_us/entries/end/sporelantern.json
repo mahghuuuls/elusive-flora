@@ -9,7 +9,7 @@
       "plant": "sporelantern",
       "name": "Sporelantern",
       "item": "elusiveflora:sporelantern",
-      "hint": "Grows on the ground in the fungus biomes of the End that other mods add."
+      "hint": "Grows on the ground in the fungus biomes of the End."
     },
     {
       "type": "elusiveflora:plant_when",

@@ -9,7 +9,7 @@
       "plant": "prismthorn",
       "name": "Prismthorn",
       "item": "elusiveflora:prismthorn",
-      "hint": "Grows on the ground in the crystal and ice End biomes that other mods add."
+      "hint": "Grows on the ground in the crystal and ice End biomes."
     },
     {
       "type": "elusiveflora:plant_when",

@@ -9,7 +9,7 @@
       "plant": "shadelace",
       "name": "Shadelace",
       "item": "elusiveflora:shadelace",
-      "hint": "Grows on the ground in the dark End biomes that other mods add."
+      "hint": "Grows on the ground in the dark End biomes."
     },
     {
       "type": "elusiveflora:plant_when",

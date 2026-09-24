@@ -9,7 +9,7 @@
       "plant": "blazecap",
       "name": "Blazecap",
       "item": "elusiveflora:blazecap",
-      "hint": "Grows on the ground in the fungus and mushroom Nether biomes that other mods add."
+      "hint": "Grows on the ground in the fungus and mushroom Nether biomes."
     },
     {
       "type": "elusiveflora:plant_when",
