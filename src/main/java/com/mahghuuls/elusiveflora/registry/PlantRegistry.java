@@ -54,7 +54,7 @@ public final class PlantRegistry {
             PlantLifecycle lifecycle = new PlantLifecycle(plant, item, seasons, scale);
             blocks.put(plant.id(), createBlock(plant, lifecycle));
         }
-        creativeTab = new ModCreativeTab(items.values().iterator().next());
+        creativeTab = new ModCreativeTab(tabIcon());
         for (ItemPickedPlant item : items.values()) {
             item.setCreativeTab(creativeTab);
         }
@@ -109,6 +109,12 @@ public final class PlantRegistry {
 
     public ItemPickedPlant itemOf(PlantDefinition plant) {
         return items.get(plant.id());
+    }
+
+    /** The tab shows the Ashen Lotus, the owner's pick for the mod icon; the first plant if the roster ever drops it. */
+    private ItemPickedPlant tabIcon() {
+        ItemPickedPlant favorite = items.get("ashenlotus");
+        return favorite != null ? favorite : items.values().iterator().next();
     }
 
     /** The effective regrow time of a plant in real minutes: the base times the plant's factor, rounded. */
