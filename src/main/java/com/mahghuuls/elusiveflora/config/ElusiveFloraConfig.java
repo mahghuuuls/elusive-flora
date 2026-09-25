@@ -27,14 +27,14 @@ public final class ElusiveFloraConfig {
 
     private static final String RESTART = " Requires a game restart.";
 
-    private final double regrowthMultiplier;
+    private final int regrowBaseMinutes;
     private final boolean enableCheckCommand;
     private final boolean debugLog;
     private final Map<String, PlantSettings> plants;
 
-    private ElusiveFloraConfig(double regrowthMultiplier, boolean enableCheckCommand, boolean debugLog,
+    private ElusiveFloraConfig(int regrowBaseMinutes, boolean enableCheckCommand, boolean debugLog,
                                Map<String, PlantSettings> plants) {
-        this.regrowthMultiplier = regrowthMultiplier;
+        this.regrowBaseMinutes = regrowBaseMinutes;
         this.enableCheckCommand = enableCheckCommand;
         this.debugLog = debugLog;
         this.plants = Collections.unmodifiableMap(plants);
@@ -46,9 +46,10 @@ public final class ElusiveFloraConfig {
         config.load();
 
         config.setCategoryComment(CATEGORY_GENERAL, "Settings that apply to every plant.");
-        double multiplier = clampDouble(readDouble(config, CATEGORY_GENERAL, "regrowthMultiplier", 1.0,
-                "Multiplies every plant's regrow time. 2.0 doubles it, 0.5 halves it. Range 0.1 to 10." + RESTART),
-                "regrowthMultiplier", 0.1, 10.0);
+        int baseMinutes = clampInt(readInt(config, CATEGORY_GENERAL, "regrowBaseMinutes", 180,
+                "Base time in real minutes for a picked plant to grow back (1 minute = 1200 ticks of world time)."
+                        + " Each plant multiplies it by its regrowFactor. Range 1 to 100000." + RESTART),
+                "regrowBaseMinutes", 1, 100000);
         boolean checkCommand = readBoolean(config, CATEGORY_GENERAL, "enableCheckCommand", false,
                 "Registers the operator command /elusiveflora, which reports which plants can appear where you stand."
                         + " Off by default; it is a pack-maker tool, not gameplay." + RESTART);
@@ -79,17 +80,22 @@ public final class ElusiveFloraConfig {
                     plant.biomeRule().biomeNames().toArray(new String[0]),
                     "Biome registry names where " + plant.displayName() + " may appear, one per line."
                             + " Example: minecraft:plains." + RESTART);
-            plants.put(plant.id(), new PlantSettings(enabled, chance, new BiomeRule(toSet(types), toSet(names))));
+            double factor = clampDouble(readDouble(config, category, "regrowFactor", plant.regrowFactor(),
+                    "Multiplier of regrowBaseMinutes for " + plant.displayName() + ". 0.5 halves the time, 2.0 doubles it."
+                            + " Range 0.1 to 10." + RESTART),
+                    category + ".regrowFactor", 0.1, 10.0);
+            plants.put(plant.id(), new PlantSettings(enabled, chance, new BiomeRule(toSet(types), toSet(names)), factor));
         }
 
         if (config.hasChanged()) {
             config.save();
         }
-        return new ElusiveFloraConfig(multiplier, checkCommand, debug, plants);
+        return new ElusiveFloraConfig(baseMinutes, checkCommand, debug, plants);
     }
 
-    public double regrowthMultiplier() {
-        return regrowthMultiplier;
+    /** Base regrow time in real minutes; every plant multiplies it by its factor. */
+    public int regrowBaseMinutes() {
+        return regrowBaseMinutes;
     }
 
     public boolean enableCheckCommand() {

@@ -37,7 +37,7 @@ class CommandElusiveFloraTest {
     void listLineShowsEffectiveSettings() {
         PlantDefinition frostbell = PlantRoster.load().byId("frostbell");
         PlantSettings settings = new PlantSettings(false, 42,
-                new BiomeRule(new LinkedHashSet<String>(Arrays.asList("SNOWY", "COLD")), Collections.<String>emptySet()));
+                new BiomeRule(new LinkedHashSet<String>(Arrays.asList("SNOWY", "COLD")), Collections.<String>emptySet()), 1.0);
         String line = CommandElusiveFlora.listLine(frostbell, settings, "matches installed biomes");
         assertEquals("Frostbell (frostbell): disabled, chunk chance 42 percent, biome types SNOWY COLD,"
                 + " biome names none, matches installed biomes", line);

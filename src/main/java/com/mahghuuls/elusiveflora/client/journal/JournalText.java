@@ -41,6 +41,26 @@ public final class JournalText {
         return text.toString();
     }
 
+    /**
+     * How long a picked plant takes to come back, in hours and minutes of real time, as the
+     * journal says it: "Grows back in 1 hour 30 minutes after a pick.".
+     */
+    public static String regrow(int minutes) {
+        int hours = minutes / 60;
+        int rest = minutes % 60;
+        StringBuilder text = new StringBuilder("Grows back in ");
+        if (hours > 0) {
+            text.append(hours).append(hours == 1 ? " hour" : " hours");
+        }
+        if (rest > 0 || hours == 0) {
+            if (hours > 0) {
+                text.append(' ');
+            }
+            text.append(rest).append(rest == 1 ? " minute" : " minutes");
+        }
+        return text.append(" after a pick.").toString();
+    }
+
     /** What a player must wait for, in the words of a field note. */
     public static String condition(Condition condition) {
         switch (condition) {

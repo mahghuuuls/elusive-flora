@@ -2,6 +2,7 @@
   "processor": "com.mahghuuls.elusiveflora.client.journal.PlantEntryProcessor",
   "components": [
     { "type": "header", "text": "When it is open", "x": -1, "y": 0 },
-    { "type": "text", "text": "#condition", "x": 0, "y": 22 }
+    { "type": "text", "text": "#condition", "x": 0, "y": 22 },
+    { "type": "text", "text": "#regrow", "x": 0, "y": 70 }
   ]
 }

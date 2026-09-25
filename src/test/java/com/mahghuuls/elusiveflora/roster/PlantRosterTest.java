@@ -30,7 +30,7 @@ class PlantRosterTest {
             "blazecap", "wartvine", "marrowbloom");
 
     private static final String HEADER = "id,display_name,status,dimension,situation_rule,biome_types,"
-            + "biome_names,ground,condition,rarity,chunk_chance_percent,regrow_game_days,yield_per_pick,"
+            + "biome_names,ground,condition,rarity,chunk_chance_percent,regrow_factor,yield_per_pick,"
             + "model,glow_light,showcase\n";
 
     private static final String GOOD_ROW =
@@ -54,8 +54,8 @@ class PlantRosterTest {
         assertEquals(DimensionKind.OVERWORLD, duskwisp.dimension());
         assertEquals(Condition.NIGHT, duskwisp.condition());
         assertEquals(9, duskwisp.glowLight());
-        assertEquals(10, duskwisp.chunkChancePercent());
-        assertEquals(2 * Condition.DAY_TICKS, duskwisp.regrowTicks());
+        assertEquals(3, duskwisp.chunkChancePercent()); // uncommon, lowered 2026-09-24
+        assertEquals(0.5, duskwisp.regrowFactor(), 0.0);
         assertEquals(PlacementKind.GROUND, duskwisp.placementKind());
         assertTrue(duskwisp.hasDormantStage());
         assertTrue(duskwisp.biomeRule().typeNames().contains("FOREST"));
@@ -126,7 +126,9 @@ class PlantRosterTest {
 
     @ParameterizedTest
     @CsvSource({
-            "',10,2,1,', ',10,0,1,', regrow_game_days",
+            "',10,2,1,', ',10,0,1,', regrow_factor",
+            "',10,2,1,', ',10,11,1,', regrow_factor",
+            "',10,2,1,', ',10,soon,1,', regrow_factor",
             "',10,2,1,', ',10,2,0,', yield_per_pick",
             "',10,2,1,', ',10,2,65,', yield_per_pick",
             "'flat,0,no', 'flat,16,no', glow_light",

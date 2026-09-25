@@ -35,7 +35,7 @@ public final class PlantRoster {
     private static final String[] COLUMNS = {
             "id", "display_name", "status", "dimension", "situation_rule", "biome_types",
             "biome_names", "ground", "condition", "rarity", "chunk_chance_percent",
-            "regrow_game_days", "yield_per_pick", "model", "glow_light", "showcase"};
+            "regrow_factor", "yield_per_pick", "model", "glow_light", "showcase"};
 
     private final List<PlantDefinition> plants;
     private final Map<String, PlantDefinition> byId;
@@ -147,14 +147,14 @@ public final class PlantRoster {
         // Only approved rows ship. A draft row left in the file is a mistake, not a hidden plant.
         row.choice("status", "approved", "approved");
         int chunkChance = row.intValue("chunk_chance_percent", 0, 100);
-        int regrowDays = row.intValue("regrow_game_days", 1, Integer.MAX_VALUE / (int) Condition.DAY_TICKS);
+        double regrowFactor = row.doubleValue("regrow_factor", 0.1, 10.0);
         // 64 is a stack; a pick never yields more than one stack.
         int yield = row.intValue("yield_per_pick", 1, 64);
         boolean threeD = row.choice("model", "3d", "flat");
         int glow = row.intValue("glow_light", 0, 15);
         boolean showcase = row.choice("showcase", "yes", "no");
         return new PlantDefinition(id, displayName, dimension, situation, biomeRule, groundRule,
-                condition, rarity, chunkChance, regrowDays * Condition.DAY_TICKS, yield, threeD,
+                condition, rarity, chunkChance, regrowFactor, yield, threeD,
                 glow, showcase);
     }
 
@@ -199,6 +199,20 @@ public final class PlantRoster {
             }
             if (number < min || number > max) {
                 throw new RosterException(where(), column, number + " is outside " + min + " to " + max);
+            }
+            return number;
+        }
+
+        double doubleValue(String column, double min, double max) {
+            String value = text(column);
+            double number;
+            try {
+                number = Double.parseDouble(value);
+            } catch (NumberFormatException e) {
+                throw new RosterException(where(), column, "needs a number, got '" + value + "'");
+            }
+            if (Double.isNaN(number) || number < min || number > max) {
+                throw new RosterException(where(), column, value + " is outside " + min + " to " + max);
             }
             return number;
         }

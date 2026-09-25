@@ -17,8 +17,8 @@ import java.util.List;
 
 /**
  * Fills the three plant page templates. A page names its plant in the {@code plant} variable; this
- * class answers the templates' {@code #condition} and {@code #biomes} from the roster and the
- * resolved biome rules, so a page never repeats what the roster and the config already say.
+ * class answers the templates' {@code #condition}, {@code #regrow}, and {@code #biomes} from the
+ * roster, the config, and the resolved biome rules, so a page never repeats what the roster and the config already say.
  * Patchouli creates one instance per template page through reflection, by the class name in the
  * template, and calls {@link #setup} each time it builds the book.
  */
@@ -49,6 +49,9 @@ public class PlantEntryProcessor implements IComponentProcessor {
         }
         if (key.equals("condition")) {
             return JournalText.condition(plant.condition());
+        }
+        if (key.equals("regrow")) {
+            return JournalText.regrow(ElusiveFloraMod.registry().regrowMinutesOf(plant));
         }
         if (key.equals("biomes")) {
             ResolvedBiomeRule rule = ElusiveFloraMod.registry().biomeRuleOf(plant);

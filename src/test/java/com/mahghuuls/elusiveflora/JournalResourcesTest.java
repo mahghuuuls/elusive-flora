@@ -170,8 +170,12 @@ class JournalResourcesTest {
         for (Condition condition : Condition.values()) {
             longestCondition = Math.max(longestCondition, JournalText.condition(condition).length());
         }
-        assertTrue(conditionTop + lines(longestCondition) * LINE_HEIGHT <= PAGE_HEIGHT,
-                "the longest condition runs off the page");
+        int regrowTop = componentY(read(TEMPLATES.resolve("plant_when.json")), "#regrow");
+        assertTrue(conditionTop + lines(longestCondition) * LINE_HEIGHT <= regrowTop,
+                "the longest condition runs into the regrow line at y " + regrowTop);
+        int longestRegrow = JournalText.regrow(1000000).length(); // base 100000 times factor 10
+        assertTrue(regrowTop + lines(longestRegrow) * LINE_HEIGHT <= PAGE_HEIGHT,
+                "the regrow line (" + longestRegrow + " chars) runs off the page from y " + regrowTop);
         // The biome text lays itself out to LINES_PER_PAGE lines of CHARS_PER_LINE; the page must hold them.
         assertTrue(biomesTop + JournalText.LINES_PER_PAGE * LINE_HEIGHT <= PAGE_HEIGHT,
                 "a full biome page runs off the page from y " + biomesTop);

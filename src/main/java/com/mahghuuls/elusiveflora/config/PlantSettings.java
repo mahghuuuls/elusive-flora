@@ -8,11 +8,18 @@ public final class PlantSettings {
     private final boolean enabled;
     private final int chunkChancePercent;
     private final BiomeRule biomeRule;
+    private final double regrowFactor;
 
-    public PlantSettings(boolean enabled, int chunkChancePercent, BiomeRule biomeRule) {
+    public PlantSettings(boolean enabled, int chunkChancePercent, BiomeRule biomeRule, double regrowFactor) {
         this.enabled = enabled;
         this.chunkChancePercent = chunkChancePercent;
         this.biomeRule = biomeRule;
+        this.regrowFactor = regrowFactor;
+    }
+
+    /** The effective multiplier of the base regrow time for this plant. */
+    public double regrowFactor() {
+        return regrowFactor;
     }
 
     public boolean enabled() {

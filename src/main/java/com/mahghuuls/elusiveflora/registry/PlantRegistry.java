@@ -39,8 +39,13 @@ public final class PlantRegistry {
         this.config = config;
         PlantLifecycle.RegrowthScale scale = new PlantLifecycle.RegrowthScale() {
             @Override
-            public double multiplier() {
-                return PlantRegistry.this.config.regrowthMultiplier();
+            public int baseMinutes() {
+                return PlantRegistry.this.config.regrowBaseMinutes();
+            }
+
+            @Override
+            public double factor(String plantId) {
+                return PlantRegistry.this.config.plant(plantId).regrowFactor();
             }
         };
         for (PlantDefinition plant : roster.plants()) {
@@ -104,6 +109,11 @@ public final class PlantRegistry {
 
     public ItemPickedPlant itemOf(PlantDefinition plant) {
         return items.get(plant.id());
+    }
+
+    /** The effective regrow time of a plant in real minutes: the base times the plant's factor, rounded. */
+    public int regrowMinutesOf(PlantDefinition plant) {
+        return (int) Math.round(config.regrowBaseMinutes() * config.plant(plant.id()).regrowFactor());
     }
 
     /** Null before {@link #resolveBiomes()} has run. */

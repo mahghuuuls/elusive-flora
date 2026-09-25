@@ -30,9 +30,13 @@ class PlantLifecycleTest {
 
     @Test
     void regrowArithmetic() {
-        assertEquals(97000, PlantLifecycle.regrowAt(1000, 48000, 2.0));
-        assertEquals(49000, PlantLifecycle.regrowAt(1000, 48000, 1.0));
-        assertEquals(5800, PlantLifecycle.regrowAt(1000, 48000, 0.1));
+        // base minutes times 1200 ticks times the plant factor, from the moment of picking
+        assertEquals(1000 + 180 * 1200, PlantLifecycle.regrowAt(1000, 180, 1.0));
+        assertEquals(1000 + 108000, PlantLifecycle.regrowAt(1000, 180, 0.5));
+        assertEquals(1000 + 144000, PlantLifecycle.regrowAt(1000, 60, 2.0));
+        assertEquals(1000 + 3600, PlantLifecycle.regrowAt(1000, 6, 0.5));
+        assertEquals(1200, PlantLifecycle.regrowTicks(1, 1.0));
+        assertEquals(120, PlantLifecycle.regrowTicks(1, 0.1));
     }
 
     @Test

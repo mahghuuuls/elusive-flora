@@ -30,6 +30,16 @@ class JournalTextTest {
     }
 
     @Test
+    void theRegrowSentenceSaysHoursAndMinutes() {
+        assertEquals("Grows back in 1 hour 30 minutes after a pick.", JournalText.regrow(90));
+        assertEquals("Grows back in 6 hours after a pick.", JournalText.regrow(360));
+        assertEquals("Grows back in 3 hours after a pick.", JournalText.regrow(180));
+        assertEquals("Grows back in 1 minute after a pick.", JournalText.regrow(1));
+        assertEquals("Grows back in 45 minutes after a pick.", JournalText.regrow(45));
+        assertEquals("Grows back in 2 hours 1 minute after a pick.", JournalText.regrow(121));
+    }
+
+    @Test
     void runTogetherVanillaNamesGetSpaces() {
         assertEquals("Forest Hills", JournalText.readable("ForestHills"));
         assertEquals("Mushroom Island", JournalText.readable("MushroomIsland"));

@@ -32,12 +32,18 @@ import net.minecraft.world.World;
 public final class PlantLifecycle {
 
     /**
-     * What the pack multiplies regrow times by. An interface rather than a number because the
-     * block package may not depend on the config package; the registry supplies the value.
+     * Where regrow times come from: the pack's base in real minutes and each plant's effective
+     * factor. An interface rather than numbers because the block package may not depend on the
+     * config package; the registry supplies the values.
      */
     public interface RegrowthScale {
-        double multiplier();
+        int baseMinutes();
+
+        double factor(String plantId);
     }
+
+    /** Ticks of world time in one real minute at the normal tick rate. */
+    public static final long TICKS_PER_MINUTE = 1200L;
 
     private final PlantDefinition plant;
     private final Item pickedItem;
@@ -73,11 +79,16 @@ public final class PlantLifecycle {
     }
 
     /**
-     * The total world time at which a stem picked now regrows: now plus the plant's regrow time
-     * scaled by the pack's multiplier, rounded to whole ticks.
+     * The total world time at which a stem picked now regrows: now plus the pack's base regrow
+     * time in minutes, as ticks, scaled by the plant's factor and rounded to whole ticks.
      */
-    public static long regrowAt(long now, long regrowTicks, double multiplier) {
-        return now + Math.round(regrowTicks * multiplier);
+    public static long regrowAt(long now, int baseMinutes, double factor) {
+        return now + regrowTicks(baseMinutes, factor);
+    }
+
+    /** The regrow time in ticks: base minutes times 1200 times the factor, rounded to whole ticks. */
+    public static long regrowTicks(int baseMinutes, double factor) {
+        return Math.round(baseMinutes * (double) TICKS_PER_MINUTE * factor);
     }
 
     /** Called from the block's random tick on the server. Applies {@link #decide} to the world. */
@@ -121,7 +132,7 @@ public final class PlantLifecycle {
         TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileEntityStem) {
             ((TileEntityStem) tile).setRegrowAt(
-                    regrowAt(world.getTotalWorldTime(), plant.regrowTicks(), scale.multiplier()));
+                    regrowAt(world.getTotalWorldTime(), scale.baseMinutes(), scale.factor(plant.id())));
         }
         return false;
     }

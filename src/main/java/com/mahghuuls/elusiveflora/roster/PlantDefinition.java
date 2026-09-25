@@ -16,7 +16,7 @@ public final class PlantDefinition {
     private final Condition condition;
     private final String rarity;
     private final int chunkChancePercent;
-    private final long regrowTicks;
+    private final double regrowFactor;
     private final int yieldPerPick;
     private final boolean showcase;
     private final boolean threeD;
@@ -24,7 +24,7 @@ public final class PlantDefinition {
 
     PlantDefinition(String id, String displayName, DimensionKind dimension, String situation,
                     BiomeRule biomeRule, GroundRule groundRule, Condition condition, String rarity,
-                    int chunkChancePercent, long regrowTicks, int yieldPerPick, boolean threeD,
+                    int chunkChancePercent, double regrowFactor, int yieldPerPick, boolean threeD,
                     int glowLight, boolean showcase) {
         this.id = id;
         this.displayName = displayName;
@@ -35,7 +35,7 @@ public final class PlantDefinition {
         this.condition = condition;
         this.rarity = rarity;
         this.chunkChancePercent = chunkChancePercent;
-        this.regrowTicks = regrowTicks;
+        this.regrowFactor = regrowFactor;
         this.yieldPerPick = yieldPerPick;
         this.threeD = threeD;
         this.glowLight = glowLight;
@@ -92,9 +92,9 @@ public final class PlantDefinition {
         return chunkChancePercent;
     }
 
-    /** Regrow time in ticks before the pack multiplier. */
-    public long regrowTicks() {
-        return regrowTicks;
+    /** Multiplier of the pack's base regrow time (0.1 to 10): 0.5 comes back fast, 2.0 slowly. */
+    public double regrowFactor() {
+        return regrowFactor;
     }
 
     public int yieldPerPick() {
